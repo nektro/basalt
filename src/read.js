@@ -18,7 +18,7 @@ export function read(blob) {
 
 export class ReadBody {
     /**
-     * @param {ArrayBuffer} ab 
+     * @param {ArrayBuffer} ab
      */
     constructor(ab) {
         /** @constant */
