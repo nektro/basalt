@@ -6,7 +6,7 @@ const decoder = new TextDecoder();
  * @param {Blob} blob
  * @returns {Promise<ReadBody>}
  */
-export function read(blob) {
+export async function read(blob) {
     const reader = new FileReader();
     return new Promise(function(resolve, reject) {
         reader.addEventListener('load', function(e) {
