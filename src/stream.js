@@ -30,13 +30,13 @@ export class TransformStream {
         this._pipe_next = null;
     }
     /**
-     * @param  {I} data
+     * @param  {<I>} data
      */
     async read(data) {
         this.write(await data);
     }
     /**
-     * @param  {O} data
+     * @param  {<O>} data
      */
     async write(data) {
         if (this._pipe_next !== null) {
