@@ -89,7 +89,6 @@ export class Lexer {
             }
             read(data) {
                 const c = data;
-
                 switch (this.inM) {
                     case Mode.Default: {
                         if (that.isValidVarChar(c)) {
