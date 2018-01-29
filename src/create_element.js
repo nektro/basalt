@@ -1,5 +1,4 @@
 //
-'use native';
 
 /**
  * @param  {String} name
