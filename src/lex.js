@@ -87,7 +87,11 @@ export class Lexer {
                 this.line = 1;
                 this.pos = 1;
             }
-            read(data) {
+            read(data, done) {
+                if (done) {
+                    this.write(data, done);
+                    return;
+                }
                 const c = data;
                 switch (this.inM) {
                     case Mode.Default: {

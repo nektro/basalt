@@ -14,11 +14,11 @@ export class Transform {
 
         reader.read().then(function handleRS({done,value}) {
             if (done) {
-                return;
+                return pipe.read(undefined, true);
             }
             else {
                 for (const b of value) {
-                    pipe.read(b);
+                    pipe.read(b, false);
                 }
                 return reader.read().then(handleRS);
             }
@@ -31,16 +31,18 @@ export class Transform {
     }
     /**
      * @param  {<I>} data
+     * @param  {Boolean} done
      */
-    async read(data) {
-        this.write(await data);
+    async read(data, done) {
+        this.write(await data, done);
     }
     /**
      * @param  {<O>} data
+     * @param  {Boolean} done
      */
-    async write(data) {
+    async write(data, done) {
         if (this._pipe_next !== null) {
-            this._pipe_next.read(data);
+            this._pipe_next.read(data, done);
         }
     }
     /**
