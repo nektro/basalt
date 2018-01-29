@@ -54,3 +54,9 @@ export class Transform {
         return ts;
     }
 }
+
+export const stringify = new (class extends Transform {
+    read(data, done) {
+        this.write(String.fromCharCode(data), done);
+    }
+})();
