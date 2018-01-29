@@ -53,6 +53,14 @@ export class Transform {
         this._pipe_next = ts;
         return ts;
     }
+    /**
+     *
+     * @param  {Array<Transform>} tsar
+     * @return {Transform<?,?>}
+     */
+    pipeAll(tsar) {
+        return tsar.reduce((accumulator, currentValue) => accumulator.pipe(currentValue), this);
+    }
 }
 
 export const stringify = new (class extends Transform {
