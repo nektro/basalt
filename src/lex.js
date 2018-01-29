@@ -1,6 +1,6 @@
 //
 
-import { TransformStream } from "./stream.js";
+import { Transform } from "./stream.js";
 
 export const TokenType = Object.freeze({
     Keyword: 'Keyword',
@@ -75,11 +75,11 @@ export class Lexer {
         throw new Error(`LexerError: Invalid character '${c}' @ ${l}:${p}`);
     }
     /**
-     * @return {TransformStream}
+     * @return {Transform}
      */
     getTransform() {
         const that = this;
-        return new (class extends TransformStream {
+        return new (class extends Transform {
             constructor() {
                 super();
                 this.inM = Mode.Default;

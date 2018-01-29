@@ -1,15 +1,15 @@
 //
 
 /**
- * @type {TransformStream<I,O>}
+ * @type {Transform<I,O>}
  */
-export class TransformStream {
+export class Transform {
     /**
      * @param  {ReadableStream} rs
-     * @return {TransformStream}
+     * @return {Transform<I,O>}
      */
     static start(rs) {
-        const pipe = new TransformStream();
+        const pipe = new Transform();
         const reader = rs.getReader();
 
         reader.read().then(function handleRS({done,value}) {
@@ -44,8 +44,8 @@ export class TransformStream {
         }
     }
     /**
-     * @param  {TransformStream} ts
-     * @return {TransformStream}
+     * @param  {Transform<O,?>} ts
+     * @return {Transform<O,?>}
      */
     pipe(ts) {
         this._pipe_next = ts;
