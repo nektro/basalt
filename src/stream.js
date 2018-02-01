@@ -63,3 +63,10 @@ export const stringify = new (class extends Transform {
         this.write(String.fromCharCode(data), done);
     }
 })();
+
+export const logger = new (class TransformLogger extends Transform {
+    read(data, done) {
+        console.log(data);
+        this.write(data, done);
+    }
+});
