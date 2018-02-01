@@ -131,16 +131,16 @@ export class Lexer {
                         if (c === ' ' || c === '\n' || that.symbols.includes(c)) {
                             if (this.buffer.length > 0) {
                                 if (that.keywords.includes(this.buffer)) {
-                                    this.write(new Token(TokenType.Keyword, this.buffer, this.line, this.pos));
+                                    this.write(new Token(TokenType.Keyword, this.buffer, this.line, this.pos), false);
                                 }
                                 else {
-                                    this.write(new Token(TokenType.Word, this.buffer, this.line, this.pos));
+                                    this.write(new Token(TokenType.Word, this.buffer, this.line, this.pos), false);
                                 }
 
                                 this.buffer = "";
                             }
                             if (that.symbols.includes(c)) {
-                                this.write(new Token(TokenType.Symbol, c, this.line, this.pos));
+                                this.write(new Token(TokenType.Symbol, c, this.line, this.pos), false);
                             }
                         }
                         else
@@ -162,7 +162,7 @@ export class Lexer {
 
                         if (c == this.buffer.charAt(0)) {
                             if ((!(this.buffer.endsWith("\\" + c))) != (this.buffer.endsWith("\\\\" + c))) {
-                                this.write(new Token(TokenType.String, this.buffer, this.line, this.pos - this.buffer.length));
+                                this.write(new Token(TokenType.String, this.buffer, this.line, this.pos - this.buffer.length), done);
                                 this.buffer = "";
                                 this.inM = Mode.Default;
                             }
