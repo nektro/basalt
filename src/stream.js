@@ -1,5 +1,6 @@
 //
 
+
 /**
  * @type {Transform<I,O>}
  */
@@ -28,6 +29,7 @@ export class Transform {
     }
     constructor() {
         this._pipe_next = null;
+        this._pipe_top = this;
     }
     /**
      * @param  {<I>} data
@@ -50,16 +52,9 @@ export class Transform {
      * @return {Transform<O,?>}
      */
     pipe(ts) {
-        this._pipe_next = ts;
+        this._pipe_next = ts._pipe_top;
+        ts._pipe_top = this._pipe_top;
         return ts;
-    }
-    /**
-     *
-     * @param  {Array<Transform>} tsar
-     * @return {Transform<?,?>}
-     */
-    pipeAll(tsar) {
-        return tsar.reduce((accumulator, currentValue) => accumulator.pipe(currentValue), this);
     }
 }
 
