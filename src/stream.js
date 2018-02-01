@@ -58,7 +58,7 @@ export class Transform {
     }
 }
 
-export const stringify = new (class extends Transform {
+export const stringify = new (class TransformStringify extends Transform {
     read(data, done) {
         this.write(String.fromCharCode(data), done);
     }
