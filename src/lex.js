@@ -79,7 +79,7 @@ export class Lexer {
      */
     getTransform() {
         const that = this;
-        return new (class extends Transform {
+        return new (class TransformLexer extends Transform {
             constructor() {
                 super();
                 this.inM = Mode.Default;
