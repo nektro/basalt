@@ -1,6 +1,6 @@
 //
-
 import { Transform } from "./stream.js";
+
 
 export const TokenType = Object.freeze({
     Keyword: 'Keyword',
