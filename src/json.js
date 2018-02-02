@@ -31,11 +31,6 @@ export const json_parser = new (class extends Parser {
         super(true);
         const VALUE = ["String","Decimal","Integer","Object","Array","Key_true","Key_false","Key_null"];
 
-        this.addRule(["Integer","Sym_.","Integer"], function(list, i) {
-            const a = list[i];
-            const b = list[i+2];
-            return new ExpressionSimple("Decimal", a.line, a.pos, parseFloat(`${a.value}.${b.value}`));
-        });
         this.addRule(["Sym_-","Decimal"], function(list, i) {
             const a = list[i];
             return new ExpressionSimple("Decimal", a.line, a.pos, (list[i+1].value * -1));
