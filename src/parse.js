@@ -187,7 +187,6 @@ export class Parser {
                     const b = this.stack.slice(l - rule.keys.length, l);
 
                     if (rule.keys.length > this.stack.length) {
-
                         continue;
                     }
                     for (let i = 0; i < rule.keys.length; i++) {
