@@ -36,7 +36,6 @@ export const json_parser = new (class extends Parser {
             return new ExpressionSimple("Decimal", a.line, a.pos, (list[i+1].value * -1));
         });
 
-
         this.addRule(["String","Sym_:",VALUE], function(list, i) {
             return new ExpressionContainer("Pair", [list[i],list[i+2]]);
         });
@@ -55,7 +54,6 @@ export const json_parser = new (class extends Parser {
         this.addRule(["Sym_{","Sym_}"], function(list, i) {
             return new ExpressionContainer("Object", [], list[i].line, list[i].pos);
         });
-
 
         this.addRule([VALUE,"Sym_,"], function(list, i) {
             return new ExpressionContainer("Elements", [list[i],]);
@@ -98,7 +96,7 @@ export const compile = new (class extends streams.Transform {
                 //
                 default: console.warn(`no translation for ${ex.type}`, ex);
             }
-        })(data, done));
+        })(data), done);
     }
 })();
 
