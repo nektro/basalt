@@ -106,7 +106,7 @@ export class Lexer {
 
                                 if (this.buffer.endsWith(`//`)) {
                                     this.buffer = "";
-                                    this.inM = Mode.LCom;
+                                    this.inM = Mode.LComm;
                                 }
                             }
                             else
@@ -125,7 +125,7 @@ export class Lexer {
 
                             if (that.hasMultiComments) {
                                 if (this.buffer.endsWith(`/*`)) {
-                                    this.inM = Mode.MlCom;
+                                    this.inM = Mode.MlComm;
                                 }
                             }
                         }
@@ -172,16 +172,16 @@ export class Lexer {
                         }
                         break;
                     }
-                    case Mode.LCom: {
+                    case Mode.LComm: {
                         if (c === '\n') {
                             this.inM = Mode.Default;
                             this.buffer = "";
                         }
                         break;
                     }
-                    case Mode.MlCom: {
+                    case Mode.MlComm: {
                         this.buffer += c;
-                        if (this.buffer.endsWith([42,47].map(x => String.fromCharCode(x)))) {
+                        if (this.buffer.endsWith([42,47].map(x => String.fromCharCode(x)).join(''))) {
                             this.inM = Mode.Default;
                             this.buffer = "";
                         }
