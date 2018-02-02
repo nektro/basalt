@@ -83,7 +83,8 @@ export class Parser {
      * @param  {Integer} p
      */
     throwError(v, l, p) {
-        throw new Error(`ParserError: Invalid identifier '${v}' @ ${l}:${p}`);
+        console.error(`ParserError: Invalid identifier '${v}' @ ${l}:${p}`);
+        return;
     }
     stream_token_to_expression() {
         const that = this;
