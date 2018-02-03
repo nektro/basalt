@@ -1,4 +1,6 @@
 //
+'use strict';
+
 import { Transform } from "./stream.js";
 
 

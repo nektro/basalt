@@ -1,4 +1,6 @@
 //
+'use strict';
+
 import * as streams from "./stream.js";
 import { Lexer } from "./lex.js";
 import { Parser, ExpressionSimple, ExpressionContainer } from "./parse.js";
