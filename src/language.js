@@ -3,7 +3,7 @@
 
 import { Transform, stringify } from "./stream.js";
 import { Lexer } from "./lex.js";
-import { Parser } from "./parse";
+import { Parser } from "./parse.js";
 
 
 export class Language {
