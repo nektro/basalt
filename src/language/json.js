@@ -1,9 +1,9 @@
 //
 'use strict';
 
-import * as streams from "./stream.js";
-import { Lexer } from "./lex.js";
-import { Parser, ExpressionSimple, ExpressionContainer } from "./parse.js";
+import * as streams from "../stream.js";
+import { Lexer } from "../lex.js";
+import { Parser, ExpressionSimple, ExpressionContainer } from "../parse.js";
 
 
 export const json_lexer = new (class extends Lexer {
