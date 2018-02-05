@@ -151,7 +151,7 @@ export class Parser {
         });
     }
     /**
-     * @return {Transform}
+     * @return {Transform<Token,Expression>}
      */
     getTransform() {
         let result = new Transform();
