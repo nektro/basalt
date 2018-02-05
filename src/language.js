@@ -6,7 +6,18 @@ import { Lexer } from "./lex.js";
 import { Parser } from "./parse.js";
 
 
+/**
+ * @type {Language}
+ */
 export class Language {
+    /**
+     * @param {Array<String>}  keys
+     * @param {Array<Character>}  syms
+     * @param {Array<Character>}  strs
+     * @param {Boolean}  hLC
+     * @param {Boolean}  hMC
+     * @param {Boolean} hasFloats
+     */
     constructor(keys, syms, strs, hLC, hMC, hasFloats) {
         const that = this;
         this.lexer = new (class extends Lexer {
@@ -33,21 +44,42 @@ export class Language {
             }
         })();
     }
+    /**
+     * @param  {Character}  c
+     * @return {Boolean}
+     */
     isValidVarChar(c) {
         return false;
     }
+    /**
+     * @return {Transform<Character,Token>}
+     */
     lex() {
         return this.lexer.getTransform();
     }
+    /**
+     * @param  {String}  word
+     * @return {Boolean}
+     */
     isValidIdentifier(word) {
         return false;
     }
+    /**
+     * @return {Transform<Token,Expression>}
+     */
     parse() {
         return this.parser.getTransform();
     }
+    /**
+     * @param  {Expression} exp
+     * @return {?}
+     */
     compileExpression(exp) {
         throw new Error('CompileError: method not defined.');
     }
+    /**
+     * @return {Transform<Byte,?}
+     */
     transform() {
         return new Transform()
         .pipe(stringify)
@@ -55,6 +87,10 @@ export class Language {
         .pipe(this.parse())
         .pipe(this.compile);
     }
+    /**
+     * @param  {ReadableStream} readable
+     * @return {Promise<?>}
+     */
     stream(readable) {
         return new Promise((resolve, reject) => {
             Transform.start(readable)
