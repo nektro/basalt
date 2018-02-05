@@ -78,7 +78,7 @@ export class Lexer {
         return;
     }
     /**
-     * @return {Transform}
+     * @return {Transform<Character,Token>}
      */
     getTransform() {
         const that = this;
