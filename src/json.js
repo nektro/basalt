@@ -22,7 +22,7 @@ export const json_lexer = new (class extends Lexer {
 })();
 
 /**
- * @return {Transform<Byte,Token>} [description]
+ * @return {streams.Transform<Byte,Token>} [description]
  */
 export function lex() {
     return json_lexer.getTransform();
@@ -76,7 +76,7 @@ export const json_parser = new (class extends Parser {
 })();
 
 /**
- * @return {Transform<Token,Expression>}
+ * @return {streams.Transform<Token,Expression>}
  */
 export function parse() {
     return json_parser.getTransform();
@@ -103,7 +103,7 @@ export const compile = new (class extends streams.Transform {
 })();
 
 /**
- * @return {Array<Transform>}
+ * @return {Array<streams.Transform>}
  */
 export function transform() {
     return new streams.Transform()
