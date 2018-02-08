@@ -31,7 +31,7 @@ export class Token {
      * @return {String}
      */
     toString() {
-        return String.format("T_%c(%s)", this.type, this.value, this.line, this.this.pos);
+        return `T_${this.type}(${this.value}){${this.line}:${this.pos}}`;
     }
 }
 
