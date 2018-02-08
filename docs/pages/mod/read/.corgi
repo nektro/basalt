@@ -1,0 +1,20 @@
+(
+    h1("Read")
+    hr
+
+    pre(
+        a[href="https://github.com/Nektro/modules.js/blob/master/src/read.js"]
+    )
+    hr
+    
+    p("The Read module is a single function module that exposes the "code("read")" function. Eventually this may be merged into a more generalized module.")
+    hr
+
+    h2("Functions")
+    dl(
+        dt(code(a[href="#/mod/read/read"]("read()")))
+        dd("Provides a "code("fetch")"-like interface for dealing with "code("Blob")"s.")
+    )
+    br
+    hr
+)

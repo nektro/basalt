@@ -1,16 +1,11 @@
 (
-    h1(output(pre("Read")))
+    h1(output(pre("read.read()")))
     hr
 
-    pre(
-        a[href="https://github.com/Nektro/modules.js/blob/master/src/read.js"]
-    )
-    hr
-    
-    p("The "code("read")" module is designed to provide a "a[href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"](code("fetch"))"-like interface for the "a[href="https://developer.mozilla.org/en-US/docs/Web/API/FileReader"](code("FileReader"))" API.")
+    p("The "code("read")" function is designed to provide a "a[href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"](code("fetch"))"-like interface on top of the "a[href="https://developer.mozilla.org/en-US/docs/Web/API/FileReader"](code("FileReader"))" API.")
     hr
 
-    h2("Function: "code("read(blob)"))
+    h2(code("read(blob)"))
     // TODO: bring back syntax block
     blockquote("Parameters")
     dl(
