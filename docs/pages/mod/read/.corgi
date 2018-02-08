@@ -3,7 +3,7 @@
     hr
 
     pre(
-        a[href="https://github.com/Nektro/modules.js/blob/master/src/read.js"]
+        a[href="https://github.com/Nektro/modules.js/blob/master/src/read.js"]("modules.js/src/read.js")
     )
     hr
     

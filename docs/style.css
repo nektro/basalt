@@ -99,9 +99,6 @@ body main a:hover code {
     background-color: #2196F3;
     color: white;
 }
-body main pre a::after {
-    content: attr(href);
-}
 body main h2 code {
     background-color: #64B5F6;
     color: #EEEEEE;
