@@ -124,12 +124,10 @@ body main code {
 body main div.example {
     position: relative;
     overflow-y: hidden;
-    height: 100%;
 }
 body main div.example figure {
     overflow-x: scroll;
     overflow-y: hidden;
-    height: 100%;
     margin: 0;
     display: grid;
 }
