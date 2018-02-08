@@ -11,6 +11,7 @@
     hr
 
     h2("Function: "code("read(blob)"))
+    // TODO: bring back syntax block
     blockquote("Parameters")
     dl(
         dt(code("blob"))
@@ -19,21 +20,21 @@
     blockquote("Returns")
     p(code(a[href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"]("Promise")"&lt;"a[href="https://developer.mozilla.org/en-US/docs/Web/API/Response"]("Response")"&gt;"))
     blockquote("Example")
-    figure(
-        figcaption("HTML")
-        pre("
-    &lt;input type='file' id='file-input' /&gt;")
-        figcaption("JS")
-        pre("
-    import { read } from 'modules.js/src/read.js';
-
-    document.getElementById('file-input').addEventListener('change', e => {
-        read(e.target.files[0])
-        .then(x => x.arrayBuffer())
-        .then(x => {
-            console.log(x); // ArrayBuffer of above File
-        });
-    });")
+    div[class="example"](
+        figure(
+            figcaption("HTML")
+            pre("&lt;input type='file' id='file-input' /&gt;")
+            figcaption("JS")
+            pre("import { read } from 'modules.js/src/read.js';")
+            pre("&nbsp;")
+            pre("document.getElementById('file-input').addEventListener('change', e => {")
+            pre("    read(e.target.files[0])")
+            pre("    .then(x => x.arrayBuffer())")
+            pre("    .then(x => {")
+            pre("        console.log(x); // ArrayBuffer of above File")
+            pre("    });")
+            pre("});")
+        )
     )
     hr
 )

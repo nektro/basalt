@@ -115,6 +115,23 @@ body main code {
 body main figure {
     margin: 1em;
 }
+body main figure figcaption {
+    margin: 1em;
+}
+body main figure pre {
+    margin: 0;
+    background-color: #eee;
+    padding: .1em;
+    padding-left: .5em;
+    border: 1px solid #ccc;
+    border-left: .5em solid #ccc;
+}
+body main figure pre + pre {
+    border-top: 0;
+}
+body main figure pre ~ pre {
+    border-bottom: 0;
+}
 
 @media (max-width: 35em) {
     body {
