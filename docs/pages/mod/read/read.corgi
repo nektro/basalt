@@ -12,7 +12,6 @@
     hr
 
     h2(code("read(blob)"))
-    // TODO: bring back syntax block
     blockquote("Parameters")
     dl(
         dt(code("blob"))
