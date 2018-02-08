@@ -121,10 +121,24 @@ body main code {
     border: 1px solid #ccc;
     border-radius: 10%;
 }
-body main figure {
-    margin: 1em;
+body main div.example {
+    position: relative;
+    overflow-y: hidden;
+    height: 100%;
 }
-body main figure figcaption {
+body main div.example figure {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 100%;
+    margin: 0;
+    display: grid;
+}
+body main div.example figure > * {
+    position: relative;
+    min-width: 100%;
+    min-width: fit-content;
+}
+body main div.example figure figcaption {
     margin: 1em;
 }
 body main div.example figure pre {
