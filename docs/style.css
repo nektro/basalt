@@ -79,6 +79,16 @@ body main h1,
 body main h1 pre {
     margin: 0;
 }
+body .crumbs {
+    display: flex;
+}
+body .crumbs code {
+    display: block;
+    margin: 0 .5em;
+}
+body .crumbs code::before {
+    content: '> ';
+}
 body main a {
     color: #2196F3;
     font-weight: 500;

@@ -2,6 +2,12 @@
     h1(output(pre("read.read()")))
     hr
 
+    div[class="crumbs"](
+        code(a[href="#/mod/read/"]("read"))
+        code("read()")
+    )
+    hr
+    
     p("The "code("read")" function is designed to provide a "a[href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"](code("fetch"))"-like interface on top of the "a[href="https://developer.mozilla.org/en-US/docs/Web/API/FileReader"](code("FileReader"))" API.")
     hr
 
