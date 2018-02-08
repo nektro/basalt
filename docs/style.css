@@ -80,14 +80,15 @@ body main h1,
 body main h1 pre {
     margin: 0;
 }
-body .crumbs {
+body main .crumbs {
     display: flex;
+    flex-direction: row;
 }
-body .crumbs code {
+body main .crumbs code {
     display: block;
     margin: 0 .5em;
 }
-body .crumbs code::before {
+body main .crumbs code::before {
     content: '> ';
 }
 body main a {
@@ -126,7 +127,7 @@ body main figure {
 body main figure figcaption {
     margin: 1em;
 }
-body main figure pre {
+body main div.example figure pre {
     margin: 0;
     background-color: #eee;
     padding: .1em;
@@ -134,10 +135,10 @@ body main figure pre {
     border: 1px solid #ccc;
     border-left: .5em solid #ccc;
 }
-body main figure pre + pre {
+body main div.example figure pre + pre {
     border-top: 0;
 }
-body main figure pre ~ pre {
+body main div.example figure pre ~ pre {
     border-bottom: 0;
 }
 
