@@ -10,11 +10,7 @@
     p("The "code("read")" module is designed to provide a "a[href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API"](code("fetch"))"-like interface for the "a[href="https://developer.mozilla.org/en-US/docs/Web/API/FileReader"](code("FileReader"))" API.")
     hr
 
-    h2("Function: "code("read()"))
-    h3("Syntax")
-    kbd(blockquote("
-        read(blob);
-    "))
+    h2("Function: "code("read(blob)"))
     blockquote("Parameters")
     dl(
         dt(code("blob"))

@@ -93,12 +93,12 @@ body main a:hover code {
 body main pre a::after {
     content: attr(href);
 }
-body main kbd blockquote {
+body main h2 code {
     background-color: #64B5F6;
     color: #EEEEEE;
-    border-left: 1em solid #2196F3;
+    border-left: .5em solid #2196F3;
     margin: 1em 0;
-    padding: 1em;
+    padding: .25em;
 }
 body main blockquote {
     margin: 1em 0;
