@@ -129,12 +129,15 @@ body main div.example figure {
     overflow-x: scroll;
     overflow-y: hidden;
     margin: 0;
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    min-width: fit-content;
 }
 body main div.example figure > * {
     position: relative;
     min-width: 100%;
-    min-width: fit-content;
+    flex-grow: 1;
+    flex-basis: auto;
 }
 body main div.example figure figcaption {
     margin: 1em;
