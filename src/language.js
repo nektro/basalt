@@ -36,13 +36,15 @@ export class Language {
                 return that.isValidIdentifier(word);
             }
         })();
-        this.compile = new (class extends Transform {
-            read(data, done) {
-                this.write(((ex) => {
-                    return that.compileExpression(ex);
-                })(data), done);
-            }
-        })();
+        this.compile = function() {
+            return new (class extends Transform {
+                read(data, done) {
+                    this.write(((ex) => {
+                        return that.compileExpression(ex);
+                    })(data), done);
+                }
+            })();
+        }
     }
     /**
      * @param  {Character}  c
@@ -85,7 +87,7 @@ export class Language {
         .pipe(stringify())
         .pipe(this.lex())
         .pipe(this.parse())
-        .pipe(this.compile);
+        .pipe(this.compile());
     }
     /**
      * @param  {ReadableStream} readable
