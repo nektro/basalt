@@ -74,7 +74,6 @@ body nav section ul li a {
 body main {
     margin: 1em;
     flex-grow: 1;
-    font-size: 1.25em;
 }
 body main h1,
 body main h1 pre {
