@@ -59,15 +59,19 @@ export class Transform {
     }
 }
 
-export const stringify = new (class TransformStringify extends Transform {
-    read(data, done) {
-        this.write(String.fromCharCode(data), done);
-    }
-})();
+export function stringify() {
+    return new (class TransformStringify extends Transform {
+        read(data, done) {
+            this.write(String.fromCharCode(data), done);
+        }
+    })();
+}
 
-export const logger = new (class TransformLogger extends Transform {
-    read(data, done) {
-        console.log(data);
-        this.write(data, done);
-    }
-});
+export function logger() {
+    return new (class TransformLogger extends Transform {
+        read(data, done) {
+            console.log(data);
+            this.write(data, done);
+        }
+    });
+}

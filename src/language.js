@@ -82,7 +82,7 @@ export class Language {
      */
     transform() {
         return new Transform()
-        .pipe(stringify)
+        .pipe(stringify())
         .pipe(this.lex())
         .pipe(this.parse())
         .pipe(this.compile);
