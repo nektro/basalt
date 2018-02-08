@@ -165,4 +165,10 @@ body main div.example figure pre ~ pre {
     body nav input[type="checkbox"]:checked ~ section {
         max-height: 200px;
     }
+    body main .crumbs {
+        flex-direction: column;
+    }
+    body main .crumbs code {
+        border-radius: 0;
+    }
 }
