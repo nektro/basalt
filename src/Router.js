@@ -42,11 +42,9 @@ export default class Router {
         });
     }
     async getPageContent(p) {
-        return this.getFileName(p).then((x) => {
-            return new Promise((resolve, reject) => {
-                this.__getPage(x[0]).then(async (y) => {
-                    resolve([await this.processFile(y),x]);
-                });
+        return this.getFileName(p).then(x => {
+            return this.__getPage(x[0]).then(async y => {
+                return [await this.processFile(y),x];
             });
         });
     }
