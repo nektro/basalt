@@ -144,7 +144,7 @@ body {
 
                 & > * {
                     position: relative;
-                    min-width: 100%;
+                    min-width: calc(100% - 1.6em);
                     flex-grow: 1;
                     flex-basis: auto;
                 }
