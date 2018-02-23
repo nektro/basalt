@@ -2,8 +2,6 @@
 'use strict';
 
 
-const decoder = new TextDecoder();
-
 /**
  * @param {Blob} blob
  * @returns {Promise<Response>}
