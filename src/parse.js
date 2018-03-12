@@ -102,7 +102,7 @@ export class Parser {
                         case TokenType.String:  return this.write(new ExpressionSimple("String", data.line, data.pos, data.value), false);
                         case TokenType.Word: {
                             if (that.isValidIdentifier(data.value)) return this.write(new ExpressionSimple("Identifier", data.line, data.pos, data.value), false);
-                            if ((new RegExp('/^([0-9]+)$/')).test(data.value))    return this.write(new ExpressionSimple("Integer", data.line, data.pos, parseInt(data.value)), false);
+                            if ((/^([0-9]+)$/).test(data.value)) return this.write(new ExpressionSimple("Integer", data.line, data.pos, parseInt(data.value)), false);
                             that.throwError(data.value, data.line, data.pos);
                         }
                     }
