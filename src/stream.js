@@ -1,6 +1,8 @@
 //
 'use strict';
 
+//
+const text_decoder = new TextDecoder("utf-8");
 
 /**
  * @type {Transform<I,O>}
@@ -19,7 +21,7 @@ export class Transform {
                 return pipe.read(undefined, true);
             }
             else {
-                for (const b of value) {
+                for (const b of text_decoder.decode(value).split('')) {
                     pipe.read(b, false);
                 }
                 return reader.read().then(handleRS);
