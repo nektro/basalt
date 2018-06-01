@@ -116,7 +116,7 @@ export class Lexer {
                             }
                             else
                             if (!(that.symbols.includes(c))) {
-                                that.throwError(c, line, this.pos);
+                                that.throwError(c, this.line, this.pos);
                                 return;
                             }
                         }
