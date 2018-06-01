@@ -1,7 +1,7 @@
 //
-'use strict';
+"use strict";
 
-import { Transform, stringify } from "./stream.js";
+import { Transform } from "./stream.js";
 import { Lexer } from "./lex.js";
 import { Parser } from "./parse.js";
 
@@ -44,10 +44,10 @@ export class Language {
                     })(data), done);
                 }
             })();
-        }
+        };
     }
     /**
-     * @param  {Character}  c
+     * @param  {Character} c
      * @return {Boolean}
      */
     isValidVarChar(c) {
@@ -77,7 +77,7 @@ export class Language {
      * @return {?}
      */
     compileExpression(exp) {
-        throw new Error('CompileError: method not defined.');
+        throw new Error("CompileError: method not defined.");
     }
     /**
      * @return {Transform<Byte,?}
@@ -93,11 +93,11 @@ export class Language {
      * @return {Promise<?>}
      */
     stream(readable) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             Transform.start(readable)
             .pipe(this.transform())
             .pipe(new (class extends Transform {
-                read(data, done) {
+                read(data) {
                     resolve(data);
                 }
             })());

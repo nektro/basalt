@@ -1,7 +1,7 @@
 //
-'use strict';
+"use strict";
 
-
+//
 export default class Switch {
     constructor() {
         this._cases = new Map();

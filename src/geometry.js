@@ -1,5 +1,5 @@
 //
-'use strict';
+"use strict";
 
 
 /**
@@ -12,7 +12,7 @@ export class Shape {
      * @return {Array<Number>}
      */
     spread() {
-        throw new Error('.spread() is an abstract method and must be defined!');
+        throw new Error(".spread() is an abstract method and must be defined!");
     }
 }
 
@@ -102,7 +102,7 @@ export class Circle extends Shape {
         return false;
     }
     spread() {
-        return [ this.x, this.y, this.radius ]
+        return [ this.x, this.y, this.radius ];
     }
 }
 

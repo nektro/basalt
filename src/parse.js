@@ -1,5 +1,5 @@
 //
-'use strict';
+"use strict";
 
 import { Transform } from "./stream.js";
 import { TokenType } from "./lex.js";
@@ -85,7 +85,7 @@ export class Parser {
      * @param  {Integer} p
      */
     throwError(v, l, p) {
-        console.error(`ParserError: Invalid identifier '${v}' @ ${l}:${p}`);
+        console.error(`ParserError: Invalid identifier "${v}" @ ${l}:${p}`);
         return;
     }
     stream_token_to_expression() {
@@ -123,7 +123,7 @@ export class Parser {
                 }
                 else {
                     if (this.temp1 === null) {
-                        if (data.type === 'Integer') {
+                        if (data.type === "Integer") {
                             this.temp1 = data;
                             return;
                         }
@@ -131,16 +131,16 @@ export class Parser {
                         return;
                     }
                     if (this.temp2 === null) {
-                        if (data.type === 'Sym_.') {
+                        if (data.type === "Sym_.") {
                             this.temp2 = data;
                             return;
                         }
                         this.write(this.temp1, done);
                         this.write(data, done);
                         this.temp1 = null;
-                        return
+                        return;
                     }
-                    if (data.type === 'Integer') {
+                    if (data.type === "Integer") {
                         this.write(new ExpressionSimple("Decimal", this.temp1.line, this.temp1.pos, parseFloat(`${this.temp1.value}.${data.value}`)), false);
                         this.temp1 = null;
                         this.temp2 = null;
@@ -171,7 +171,7 @@ export class Parser {
                 if (done) {
                     if (this.stack.length !== 1) {
                         console.error(this.stack);
-                        console.error('ParserError: Incomplete AST after reaching end of file!');
+                        console.error("ParserError: Incomplete AST after reaching end of file!");
                         return;
                     }
                     else {
@@ -194,12 +194,12 @@ export class Parser {
                     }
                     for (let i = 0; i < rule.keys.length; i++) {
                         const k = rule.keys[i];
-                        if (typeof k === 'string') {
+                        if (typeof k === "string") {
                             if (b[i].type !== k) {
                                 continue loop_1;
                             }
                         }
-                        if (typeof k === 'object') {
+                        if (typeof k === "object") {
                             if (!(k.includes(b[i].type))) {
                                 continue loop_1;
                             }
@@ -207,7 +207,7 @@ export class Parser {
                     }
 
                     const exp = rule.onSuccess(this.stack, i);
-                    new Array(rule.keys.length).fill(0).forEach(x => this.stack.pop());
+                    new Array(rule.keys.length).fill(0).forEach(() => this.stack.pop());
                     this.stack.push(exp);
                     j = -1;
                 }

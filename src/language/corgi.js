@@ -1,5 +1,5 @@
 //
-'use strict';
+"use strict";
 
 import { Language } from "../language.js";
 import { ExpressionSimple, ExpressionContainer } from "../parse.js";
@@ -9,8 +9,8 @@ export default new (class extends Language {
     constructor() {
         super(
             [],
-            ['(',')','[',']','=',','],
-            ['"'],
+            ["(",")","[","]","=",","],
+            ["\""],
             true,
             true,
             false
@@ -36,22 +36,22 @@ export default new (class extends Language {
 
     }
     isValidVarChar(c) {
-        return ((c >= 'a') && (c <= 'z')) || ((c >= '0') && (c <= '9') || (c === '-'));
+        return ((c >= "a") && (c <= "z")) || ((c >= "0") && (c <= "9") || (c === "-"));
     }
     isValidIdentifier(word) {
         return true;
     }
     compileExpression(ex) {
         switch (ex.type) {
-            case 'Children': return ex.value.map(x => this.compileExpression(x)).join('');
-            case 'ElementIAC': return `<${this.compileExpression(ex.value[0])}${this.compileExpression(ex.value[1])}>${this.compileExpression(ex.value[2])}</${this.compileExpression(ex.value[0])}>`;
-            case 'Identifier': return ex.value;
-            case 'AttrList': return ex.value.map(x => ` ${this.compileExpression(x)}`).join('');
-            case 'Attr': return `${this.compileExpression(ex.value[0])}="${this.compileExpression(ex.value[1])}"`;
-            case 'String': return ex.value.substring(1, ex.value.length - 1);
-            case 'ElementIC': return `<${this.compileExpression(ex.value[0])}>${this.compileExpression(ex.value[1])}</${this.compileExpression(ex.value[0])}>`;
-            case 'ElementIA': return `<${this.compileExpression(ex.value[0])}${this.compileExpression(ex.value[1])}></${this.compileExpression(ex.value[0])}>`;
-            case 'ElementI': return `<${this.compileExpression(ex.value[0])}/>`
+            case "Children": return ex.value.map(x => this.compileExpression(x)).join("");
+            case "ElementIAC": return `<${this.compileExpression(ex.value[0])}${this.compileExpression(ex.value[1])}>${this.compileExpression(ex.value[2])}</${this.compileExpression(ex.value[0])}>`;
+            case "Identifier": return ex.value;
+            case "AttrList": return ex.value.map(x => ` ${this.compileExpression(x)}`).join("");
+            case "Attr": return `${this.compileExpression(ex.value[0])}="${this.compileExpression(ex.value[1])}"`;
+            case "String": return ex.value.substring(1, ex.value.length - 1);
+            case "ElementIC": return `<${this.compileExpression(ex.value[0])}>${this.compileExpression(ex.value[1])}</${this.compileExpression(ex.value[0])}>`;
+            case "ElementIA": return `<${this.compileExpression(ex.value[0])}${this.compileExpression(ex.value[1])}></${this.compileExpression(ex.value[0])}>`;
+            case "ElementI": return `<${this.compileExpression(ex.value[0])}/>`
             //
             default: console.warn(`no translation for ${ex.type}`, ex);
         }

@@ -1,14 +1,14 @@
 //
-'use strict';
+"use strict";
 
 import { Transform } from "./stream.js";
 
 
 export const TokenType = Object.freeze({
-    Keyword: 'Keyword',
-    Symbol: 'Symbol',
-    Word: 'Word',
-    String: 'String'
+    Keyword: "Keyword",
+    Symbol: "Symbol",
+    Word: "Word",
+    String: "String"
 });
 
 /**
@@ -71,10 +71,9 @@ export class Lexer {
      * @param  {Character} c
      * @param  {Number} l
      * @param  {Number} p
-     * @param  {Mode} m
      */
-    throwError(c, l, p, m) {
-        console.error(`LexerError: Invalid character '${c}' @ ${l}:${p}`);
+    throwError(c, l, p) {
+        console.error(`LexerError: Invalid character "${c}" @ ${l}:${p}`);
         return;
     }
     /**
@@ -102,7 +101,7 @@ export class Lexer {
                             this.buffer += c;
                         }
                         else
-                        if (c === '/') {
+                        if (c === "/") {
                             if (that.hasLineComments) {
                                 this.buffer += c;
 
@@ -122,7 +121,7 @@ export class Lexer {
                             }
                         }
                         else
-                        if (c === '*') {
+                        if (c === "*") {
                             this.buffer += c;
 
                             if (that.hasMultiComments) {
@@ -132,7 +131,7 @@ export class Lexer {
                             }
                         }
                         else
-                        if (c === ' ' || c === '\n' || that.symbols.includes(c)) {
+                        if (c === " " || c === "\n" || that.symbols.includes(c)) {
                             if (this.buffer.length > 0) {
                                 if (that.keywords.includes(this.buffer)) {
                                     this.write(new Token(TokenType.Keyword, this.buffer, this.line, this.pos), false);
@@ -148,7 +147,7 @@ export class Lexer {
                             }
                         }
                         else
-                        if (['\t','\r'].includes(c)) {
+                        if (["\t","\r"].includes(c)) {
                             //
                         }
                         else
@@ -175,7 +174,7 @@ export class Lexer {
                         break;
                     }
                     case Mode.LComm: {
-                        if (c === '\n') {
+                        if (c === "\n") {
                             this.inM = Mode.Default;
                             this.buffer = "";
                         }
@@ -183,7 +182,7 @@ export class Lexer {
                     }
                     case Mode.MlComm: {
                         this.buffer += c;
-                        if (this.buffer.endsWith([42,47].map(x => String.fromCharCode(x)).join(''))) {
+                        if (this.buffer.endsWith([42,47].map(x => String.fromCharCode(x)).join(""))) {
                             this.inM = Mode.Default;
                             this.buffer = "";
                         }
@@ -191,7 +190,7 @@ export class Lexer {
                     }
                 }
                 this.pos += 1;
-                if (c !== '\n') return;
+                if (c !== "\n") return;
                 this.line += 1;
                 this.pos = 1;
             }

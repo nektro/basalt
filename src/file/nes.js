@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 // parse a .nes file as a JS Object
 // Nintendo Entertainment System ROM
 // @see http://fms.komkon.org/EMUL8/NES.html
@@ -19,7 +19,7 @@ export function decode(ui8a) {
             this.sizePrgRam = ui8a.slice(p, p += 1)[0];
             this.flag9 = ui8a.slice(p, p += 1)[0];
             this.flag10 = ui8a.slice(p, p += 1)[0];
-            console.assert(ui8a.slice(p, p += 5).every(v => v === 0), 'Bytes 11-15 must be 0!');
+            console.assert(ui8a.slice(p, p += 5).every(v => v === 0), "Bytes 11-15 must be 0!");
             if ((this.flag6 & 4) > 0) this.trainer = ui8a.slice(p, p += 512);
             this.prgROM = ui8a.slice(p, p += (16384*this.sizePrgRom));
             this.chrROM = ui8a.slice(p, p += (8192*this.sizeChrRom));

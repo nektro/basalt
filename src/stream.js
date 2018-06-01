@@ -1,5 +1,5 @@
 //
-'use strict';
+"use strict";
 
 //
 const text_decoder = new TextDecoder("utf-8");
@@ -16,12 +16,12 @@ export class Transform {
         const pipe = new Transform();
         const reader = rs.getReader();
 
-        reader.read().then(function handleRS({done,value}) {
+        reader.read().then(async function handleRS({done,value}) {
             if (done) {
                 return pipe.read(undefined, true);
             }
             else {
-                for (const b of text_decoder.decode(value).split('')) {
+                for (const b of text_decoder.decode(value).split("")) {
                     pipe.read(b, false);
                 }
                 return reader.read().then(handleRS);
@@ -39,7 +39,7 @@ export class Transform {
      * @param  {Boolean} done
      */
     async read(data, done) {
-        this.write(await data, done);
+        this.write(data, done);
     }
     /**
      * @param  {<O>} data

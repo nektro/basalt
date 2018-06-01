@@ -1,5 +1,5 @@
 //
-'use strict';
+"use strict";
 
 
 /**
@@ -7,13 +7,13 @@
  */
 export default class Router {
     constructor(r, ops) {
-        const options = Object.assign({}, {extension:'.html'}, ops || {});
+        const options = Object.assign({}, {extension:".html"}, ops || {});
         this.root = r;
         this.cache = new Map();
         this.extension = options.extension;
         this.element = document.body;
-        window.addEventListener('hashchange', (e) => {
-            this.gotoPage(e.newURL.substring(e.newURL.indexOf('#') + 1));
+        window.addEventListener("hashchange", (e) => {
+            this.gotoPage(e.newURL.substring(e.newURL.indexOf("#") + 1));
         });
     }
     resolveFileName(rt) {
@@ -22,7 +22,7 @@ export default class Router {
     async getFileName(pn) {
         let rsn = this.resolveFileName(pn);
         if (rsn !== undefined) return Promise.resolve(rsn);
-        return Promise.resolve([`/blank`]);
+        return Promise.resolve(["/blank"]);
     }
     async processFile(src) {
         return src;
@@ -33,8 +33,8 @@ export default class Router {
         }
         return fetch(this.root + pn + this.extension).then((r) => {
             if (r.status === 200) return r.text();
-            if (pn === '/blank') return ``;
-            return this.__getPage(`/blank`);
+            if (pn === "/blank") return "";
+            return this.__getPage("/blank");
         })
         .then((r) => {
             this.cache.set(pn, r);

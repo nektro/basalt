@@ -1,5 +1,5 @@
 //
-'use strict';
+"use strict";
 
 import { Language } from "../language.js";
 import { ExpressionSimple, ExpressionContainer } from "../parse.js";
@@ -8,9 +8,9 @@ import { ExpressionSimple, ExpressionContainer } from "../parse.js";
 export default new (class extends Language {
     constructor() {
         super(
-            ['true','false','null'],
-            ['{','}','[',']',':',',','.','-'],
-            ['"'],
+            ["true","false","null"],
+            ["{","}","[","]",":",",",".","-"],
+            ["\""],
             true,
             true,
             true
@@ -59,19 +59,19 @@ export default new (class extends Language {
         });
     }
     isValidVarChar(c) {
-        return ((c >= 'a') && (c <= 'z')) || ((c >= '0') && (c <= '9'));
+        return ((c >= "a") && (c <= "z")) || ((c >= "0") && (c <= "9"));
     }
     compileExpression(ex) {
         switch (ex.type) {
-            case 'Array':     return ex.value.map(v => this.compileExpression(v));
-            case 'Object':    return Object.assign({}, ...ex.value.map(v => this.compileExpression(v)));
-            case 'Pair':      return Object.defineProperty({}, this.compileExpression(ex.value[0]), { value:this.compileExpression(ex.value[1]), configurable:true, enumerable:true, writable:true });
-            case 'String':    return ex.value.substring(1, ex.value.length - 1);
-            case 'Integer':
-            case 'Decimal':   return ex.value;
-            case 'Key_null':  return null;
-            case 'Key_false': return false;
-            case 'Key_true':  return true;
+            case "Array":     return ex.value.map(v => this.compileExpression(v));
+            case "Object":    return Object.assign({}, ...ex.value.map(v => this.compileExpression(v)));
+            case "Pair":      return Object.defineProperty({}, this.compileExpression(ex.value[0]), { value:this.compileExpression(ex.value[1]), configurable:true, enumerable:true, writable:true });
+            case "String":    return ex.value.substring(1, ex.value.length - 1);
+            case "Integer":
+            case "Decimal":   return ex.value;
+            case "Key_null":  return null;
+            case "Key_false": return false;
+            case "Key_true":  return true;
             //
             default: console.warn(`no translation for ${ex.type}`, ex);
         }
