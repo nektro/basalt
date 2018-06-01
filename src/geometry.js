@@ -25,6 +25,7 @@ export class Point extends Shape {
      * @param {Number} b
      */
     constructor(a, b) {
+        super();
         this.x = a || 0;
         this.y = b || 0;
     }
@@ -74,6 +75,7 @@ export class Circle extends Shape {
      * @param {Number} c
      */
     constructor(a, b, c) {
+        super();
         this.x = a || 0;
         this.y = b || 0;
         this.radius = c || 0;
@@ -113,6 +115,7 @@ export class Line extends Shape {
      * @param {Point} p2
      */
     constructor(p1, p2) {
+        super();
         this.pt1 = p1 || new Point();
         this.pt2 = p2 || new Point();
     }
@@ -138,6 +141,7 @@ export class Rectangle extends Shape {
      * @param {Number} h
      */
     constructor(x, y, w, h) {
+        super();
         this.x = x;
         this.y = y;
         this.width = w;
