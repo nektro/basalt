@@ -24,15 +24,15 @@ export class Pencil {
      * draw image to the canvas
      * 
      * @param  {Image} image
-     * @param  {Number} sx
-     * @param  {Number} sy
-     * @param  {Number} sw
-     * @param  {Number} sh
-     * @param  {Number} dx
-     * @param  {Number} dy
-     * @param  {Number} dw
-     * @param  {Number} dh
-     * @param  {Number} rad
+     * @param  {Number} sx sourceX
+     * @param  {Number} sy sourceY
+     * @param  {Number} sw sourceWidth
+     * @param  {Number} sh sourceHeight
+     * @param  {Number} dx destX
+     * @param  {Number} dy destY
+     * @param  {Number} dw destWidth
+     * @param  {Number} dh destHeight
+     * @param  {Number} rad radiansToRotate
      */
     drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh, rad) {
         this.ctx.globalAlpha = 1;
@@ -50,7 +50,7 @@ export class Pencil {
     /**
      * complete path started with beginPath with a fill
      * 
-     * @param  {String} c
+     * @param  {String} c color
      */
     fill(c) {
         if (c !== undefined)
@@ -60,7 +60,7 @@ export class Pencil {
     /**
      * complete path started with beginPath with a stroke
      * 
-     * @param  {String} c
+     * @param  {String} c color
      */
     stroke(c) {
         if (c !== undefined)
@@ -68,7 +68,7 @@ export class Pencil {
         this.ctx.stroke();
     }
     /**
-     * @param  {String} m
+     * @param  {String} m mode
      */
     _getDrawMethod(m) {
         switch (m) {
@@ -81,18 +81,18 @@ export class Pencil {
         }
     }
     /**
-     * @param  {String} m
-     * @param  {String} c
-     * @param  {Number} [a=1]
+     * @param  {String} m mode
+     * @param  {String} c color
+     * @param  {Number} [a=1] alpha
      */
     draw(m, c, a=1) {
         this.ctx.globalAlpha = a;
         this._getDrawMethod(m)(c);
     }
     /**
-     * @param  {shape.Shape} s
-     * @param  {String} m
-     * @param  {String} c
+     * @param  {shape.Shape} s shape
+     * @param  {String} m mode
+     * @param  {String} c color
      */
     drawShape(s, m, c) {
         switch (s.__proto__.constructor.name) {
@@ -127,9 +127,9 @@ export class Pencil {
     /**
      * draw an array of Points
      * 
-     * @param  {Array<Point>} pts
-     * @param  {String} m
-     * @param  {String} c
+     * @param  {Array<Point>} pts points
+     * @param  {String} m mode
+     * @param  {String} c color
      */
     drawPolygon(pts, m, c) {
         this.ctx.beginPath();
@@ -143,13 +143,13 @@ export class Pencil {
     /**
      * draw a rectangle
      * 
-     * @param  {Number} x
-     * @param  {Number} y
-     * @param  {Number} w
-     * @param  {Number} h
-     * @param  {String} m
-     * @param  {String} c
-     * @param  {Number} a
+     * @param  {Number} x x
+     * @param  {Number} y y
+     * @param  {Number} w width
+     * @param  {Number} h height
+     * @param  {String} m mode
+     * @param  {String} c color
+     * @param  {Number} a alpha
      */
     drawRect(x, y, w, h, m, c, a) {
         this.ctx.beginPath();
@@ -159,12 +159,12 @@ export class Pencil {
     /**
      * draw Text
      * 
-     * @param  {Number} x
-     * @param  {Number} y
-     * @param  {String} m
-     * @param  {String} t
-     * @param  {String} c
-     * @param  {String} f
+     * @param  {Number} x x
+     * @param  {Number} y y
+     * @param  {String} m mode
+     * @param  {String} t text
+     * @param  {String} c color
+     * @param  {String} f font
      */
     drawText(x, y, m, t, c, f) {
         if (c !== undefined)
