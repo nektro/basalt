@@ -24,13 +24,15 @@ export class Point extends Shape {
      * @param {Number} a
      * @param {Number} b
      */
-    constructor(a, b) {
+    constructor(a=0, b=0, c=0, d=0) {
         super();
-        this.x = a || 0;
-        this.y = b || 0;
+        this.x = a;
+        this.y = b;
+        this.z = c;
+        this.w = d;
     }
     spread() {
-        return [ this.x, this.y ];
+        return [ this.x, this.y, this.z, this.w ];
     }
     /**
      * @param  {Point} pt
