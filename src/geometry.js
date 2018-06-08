@@ -46,6 +46,7 @@ export class Point extends Shape {
     add(pt) {
         this.x += pt.x;
         this.y += pt.y;
+        this.z += pt.z;
         return this;
     }
     /**
@@ -55,6 +56,7 @@ export class Point extends Shape {
     sub(pt) {
         this.x -= pt.x;
         this.y -= pt.y;
+        this.z -= pt.z;
         return this;
     }
     /**
