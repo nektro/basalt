@@ -184,3 +184,16 @@ export class Square extends Rectangle {
         super(x, y, s, s);
     }
 }
+
+/**
+ * @type {Polygon}
+ */
+export class Polygon extends Shape {
+    /**
+     * @param {Array<Point>} points
+     */
+    constructor(...points) {
+        super();
+        this.points = points;
+    }
+}
