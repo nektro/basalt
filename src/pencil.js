@@ -36,7 +36,7 @@ export class Pencil {
      */
     drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh, rad) {
         this.ctx.globalAlpha = 1;
-        if (rad === 0) {
+        if (rad === undefined || rad === 0) {
             this.ctx.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh);
         }
         else {
