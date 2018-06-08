@@ -1,6 +1,9 @@
+/**
+ */
 //
 "use strict";
-
+//
+import { Point, Circle, Line, Rectangle, Polygon } from "./geometry.js";
 
 /**
  * @type {Pencil}
@@ -94,33 +97,25 @@ export class Pencil {
      * @param  {String} c color
      */
     drawShape(s, m, c) {
-        switch (s.__proto__.constructor.name) {
-            case "Point": {
-                this.drawRect(s.x, s.y, 1, 1, c, m);
-                break;
-            }
-            case "Circle": {
-                this.ctx.beginPath();
-                this.ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-                this.draw(m,c);
-                break;
-            }
-            case "Line": {
-                this.ctx.beginPath();
-                this.ctx.moveTo(s.pt1.x, s.pt1.y);
-                this.ctx.lineTo(s.pt2.x, s.pt2.y);
-                this.draw(m,c);
-                break;
-            }
-            case "Rectangle":
-            case "Square": {
-                this.drawRect(s.x, s.y, s.width, s.height, m, c);
-                break;
-            }
-            case "Polygon": {
-                this.drawPolygon(s.pts, m, c);
-                break;
-            }
+        if (s instanceof Point) {
+            this.drawRect(s.x, s.y, 1, 1, m, c);
+        }
+        else if (s instanceof Circle) {
+            this.ctx.beginPath();
+            this.ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+            this.draw(m,c);
+        }
+        else if (s instanceof Line) {
+            this.ctx.beginPath();
+            this.ctx.moveTo(s.pt1.x, s.pt1.y);
+            this.ctx.lineTo(s.pt2.x, s.pt2.y);
+            this.draw(m,c);
+        }
+        else if (s instanceof Rectangle) {
+            this.drawRect(s.x, s.y, s.width, s.height, m, c);
+        }
+        else if (s instanceof Polygon) {
+            this.drawPolygon(s.points, m, c);
         }
     }
     /**
