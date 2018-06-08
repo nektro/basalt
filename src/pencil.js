@@ -75,8 +75,7 @@ export class Pencil {
             case "stroke": return this.stroke.bind(this);
             case "fill": return this.fill.bind(this);
             default: {
-                console.error(`"${m}" is not a valid Pencil drawing method`);
-                return this.fill;
+                throw new Error(`"${m}" is not a valid Pencil drawing method`);
             }
         }
     }
