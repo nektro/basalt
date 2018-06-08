@@ -163,7 +163,7 @@ export class Pencil {
     drawText(x, y, m, t, c, f) {
         if (c !== undefined)
             this.ctx[`${m}Style`] = c;
-        if (f !== undefined)
+        if (f !== undefined || this.ctx.font !== f)
             this.ctx.font = f;
         this.ctx[`${m}Text`](t, x, y);
     }
