@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/nektro/basalt.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "author": "Sean Denny <nektromc@gmail.com>",
   "license": "MIT",
   "devDependencies": {
