@@ -64,7 +64,7 @@ export class Point extends Shape {
      * @return {Point}
      */
     clone() {
-        return new Point(this.x, this.y);
+        return new Point(...this.spread());
     }
 }
 
