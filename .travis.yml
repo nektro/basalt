@@ -1,7 +1,0 @@
-language: node_js
-
-deploy:
-  on:
-    branch: master
-  provider: script
-  script: bash deploy.sh
