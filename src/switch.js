@@ -1,6 +1,7 @@
+/**
+ */
 //
 "use strict";
-
 //
 export default class Switch {
     constructor() {

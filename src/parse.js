@@ -1,6 +1,8 @@
+/**
+ */
 //
 "use strict";
-
+//
 import { Transform } from "./stream.js";
 import { TokenType } from "./lex.js";
 

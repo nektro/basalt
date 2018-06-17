@@ -1,6 +1,8 @@
 /**
  */
 //
+"use strict";
+//
 window.addEventListener("gamepadconnected",    function(e) { handleGamepadEvent(e.gamepad, true);  });
 window.addEventListener("gamepaddisconnected", function(e) { handleGamepadEvent(e.gamepad, false); });
 

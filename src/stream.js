@@ -1,6 +1,7 @@
+/**
+ */
 //
 "use strict";
-
 //
 const text_decoder = new TextDecoder("utf-8");
 

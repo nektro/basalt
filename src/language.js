@@ -1,6 +1,8 @@
+/**
+ */
 //
 "use strict";
-
+//
 import { Transform } from "./stream.js";
 import { Lexer } from "./lex.js";
 import { Parser } from "./parse.js";
