@@ -1,3 +1,6 @@
+/**
+ */
+//
 "use strict";
 // parse a .nes file as a JS Object
 // Nintendo Entertainment System ROM
