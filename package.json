@@ -12,12 +12,6 @@
   },
   "author": "Sean Denny <nektromc@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
-    "jest": "^23.1.0"
-  },
-  "scripts": {
-    "test": "jest"
-  },
   "bugs": {
     "url": "https://github.com/nektro/basalt/issues"
   },
