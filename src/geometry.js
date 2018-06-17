@@ -31,6 +31,7 @@ export class Point extends Shape {
         this.z = c;
     }
     spread() {
+        return [ this.x, this.y, this.z ];
     }
     /**
      * @param  {Point} pt
