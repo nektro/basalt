@@ -1,6 +1,5 @@
 # Basalt
 
-![travis](https://api.travis-ci.org/nektro/basalt.svg)
 ![loc](https://tokei.rs/b1/github/nektro/basalt)
 ![license](https://img.shields.io/github/license/nektro/basalt.svg)
 ![contribs](https://img.shields.io/github/contributors/nektro/basalt.svg)
