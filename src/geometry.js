@@ -33,6 +33,9 @@ export class Point extends Shape {
     spread() {
         return [ this.x, this.y, this.z ];
     }
+    [Symbol.iterator]() {
+        return [ this.x, this.y, this.z ];
+    }
     /**
      * @param  {Point} pt
      * @return {Float}
