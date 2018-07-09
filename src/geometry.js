@@ -73,6 +73,12 @@ export class Point extends Shape {
     clone() {
         return new Point(...this.spread());
     }
+    reset() {
+        this.x = 0;
+        this.y = 0;
+        this.z = 0;
+        return this;
+    }
 }
 
 /**
