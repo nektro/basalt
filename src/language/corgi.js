@@ -1,5 +1,5 @@
 /**
- * https://nektro.github.io/basalt/src/language/corgi.js
+ * https://github.com/nektro/basalt/blob/master/src/language/corgi.js
  */
 //
 "use strict";

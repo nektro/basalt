@@ -1,5 +1,9 @@
+/**
+ * https://github.com/nektro/basalt/blob/master/src/geometry.js
+ */
 //
 "use strict";
+//
 
 
 /**

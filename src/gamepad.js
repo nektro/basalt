@@ -1,5 +1,5 @@
 /**
- * https://nektro.github.io/basalt/src/gamepad.js
+ * https://github.com/nektro/basalt/blob/master/src/gamepad.js
  */
 //
 "use strict";
