@@ -21,7 +21,7 @@ function handleGamepadEvent(gamepad, incoming) {
 }
 
 function sendEvent(pad, type, prop, index, value) {
-    return window.dispatchEvent(new CustomEvent("x-gamepad:change", {
+    window.dispatchEvent(new CustomEvent("x-gamepad:change", {
         detail: {
             gamepad: pad,
             type,
