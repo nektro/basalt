@@ -4,8 +4,6 @@
 //
 "use strict";
 //
-import { Transform } from "./stream.js";
-
 
 /**
  * @type {TokenType}
@@ -84,124 +82,120 @@ export class Lexer {
     throwError(c, l, p) {
         throw new Error(`LexerError: Invalid character "${c}" @ ${l}:${p}`);
     }
-    /**
-     * @return {Transform<Character,Token>}
-     */
-    getTransform() {
-        const that = this;
-        return new (class TransformLexer extends Transform {
-            constructor() {
-                super();
-                this.inM = Mode.Default;
-                this.buffer = "";
-                this.line = 1;
-                this.pos = 1;
-            }
-            read(data, done) {
-                if (done) {
-                    this.write(data, done);
-                    return;
-                }
-                const c = data;
-                switch (this.inM) {
-                    case Mode.Default: {
-                        if (that.isValidVarChar(c)) {
-                            this.buffer += c;
-                        }
-                        else
-                        if (c === "/") {
-                            if (that.hasLineComments) {
-                                this.buffer += c;
+    async parse(text) {
+        const results = [];
+        let inM = Mode.Default;
+        let buffer = "";
+        let line = 1;
+        let pos = 1;
 
-                                if (this.buffer.endsWith(`//`)) {
-                                    this.buffer = "";
-                                    this.inM = Mode.LComm;
-                                }
-                            }
-                            else
-                            if (that.hasMultiComments) {
-                                this.buffer += c;
-                            }
-                            else
-                            if (!(that.symbols.includes(c))) {
-                                that.throwError(c, this.line, this.pos);
-                                return;
-                            }
-                        }
-                        else
-                        if (c === "*") {
-                            this.buffer += c;
+        for (const c of text) {
+            switch (inM) {
+                case Mode.Default: {
+                    if (this.isValidVarChar(c)) {
+                        buffer += c;
+                    }
+                    else
+                    if (c === "/") {
+                        if (this.hasLineComments) {
+                            buffer += c;
 
-                            if (that.hasMultiComments) {
-                                if (this.buffer.endsWith(`/*`)) {
-                                    this.inM = Mode.MlComm;
-                                }
+                            if (buffer.endsWith("//")) {
+                                buffer = "";
+                                inM = Mode.LComm;
                             }
                         }
                         else
-                        if (c === " " || c === "\n" || that.symbols.includes(c)) {
-                            if (this.buffer.length > 0) {
-                                if (that.keywords.includes(this.buffer)) {
-                                    this.write(new Token(TokenType.Keyword, this.buffer, this.line, this.pos), false);
-                                }
-                                else {
-                                    this.write(new Token(TokenType.Word, this.buffer, this.line, this.pos), false);
-                                }
-
-                                this.buffer = "";
-                            }
-                            if (that.symbols.includes(c)) {
-                                this.write(new Token(TokenType.Symbol, c, this.line, this.pos), false);
-                            }
+                        if (this.hasMultiComments) {
+                            buffer += c;
                         }
                         else
-                        if (["\t","\r"].includes(c)) {
-                            //
-                        }
-                        else
-                        if (that.stringDelims.includes(c)) {
-                            this.buffer += c;
-                            this.inM = Mode.String;
-                        }
-                        else {
-                            that.throwError(c, this.line, this.pos);
+                        if (!(this.symbols.includes(c))) {
+                            this.throwError(c, line, pos, results);
                             return;
                         }
-                        break;
                     }
-                    case Mode.String: {
-                        this.buffer += c;
+                    else
+                    if (c === "*") {
+                        if (this.hasMultiComments) {
+                            buffer += c;
 
-                        if (c == this.buffer.charAt(0)) {
-                            if ((!(this.buffer.endsWith("\\" + c))) != (this.buffer.endsWith("\\\\" + c))) {
-                                this.write(new Token(TokenType.String, this.buffer, this.line, this.pos - this.buffer.length), done);
-                                this.buffer = "";
-                                this.inM = Mode.Default;
+                            if (buffer.endsWith("/*")) {
+                                inM = Mode.MlComm;
+                            }
+                            else
+                            if (!(this.symbols.includes("*"))) {
+                                this.throwError("*", line, pos, results);
                             }
                         }
-                        break;
                     }
-                    case Mode.LComm: {
-                        if (c === "\n") {
-                            this.inM = Mode.Default;
-                            this.buffer = "";
+                    else
+                    if (c === " " || c === "\n" || this.symbols.includes(c)) {
+                        if (buffer.length > 0) {
+                            if (this.symbols.includes(buffer)) { // for / and *
+                                results.push(new Token(TokenType.Symbol, buffer, line, pos-buffer.length, 3));
+                            }
+                            else
+                            if (this.keywords.includes(buffer)) {
+                                results.push(new Token(TokenType.Keyword, buffer, line, pos-buffer.length, 1));
+                            }
+                            else {
+                                results.push(new Token(TokenType.Word, buffer, line, pos-buffer.length, 2));
+                            }
+                            buffer = "";
                         }
-                        break;
-                    }
-                    case Mode.MlComm: {
-                        this.buffer += c;
-                        if (this.buffer.endsWith([42,47].map(x => String.fromCharCode(x)).join(""))) {
-                            this.inM = Mode.Default;
-                            this.buffer = "";
+                        if (this.symbols.includes(c)) {
+                            results.push(new Token(TokenType.Symbol, c, line, pos+1, 3));
                         }
-                        break;
                     }
+                    else
+                    if (["\t","\r"].includes(c)) {
+                        //
+                    }
+                    else
+                    if (this.stringDelims.includes(c)) {
+                        buffer += c;
+                        inM = Mode.String;
+                    }
+                    else {
+                        this.throwError(c, line, pos, results);
+                        return;
+                    }
+                    break;
                 }
-                this.pos += 1;
-                if (c !== "\n") return;
-                this.line += 1;
-                this.pos = 1;
+                case Mode.String: {
+                    buffer += c;
+
+                    if (c == buffer.charAt(0)) {
+                        if ((!(buffer.endsWith("\\" + c))) != (buffer.endsWith("\\\\" + c))) {
+                            results.push(new Token(TokenType.String, buffer, line, pos - buffer.length, 4));
+                            buffer = "";
+                            inM = Mode.Default;
+                        }
+                    }
+                    break;
+                }
+                case Mode.LComm: {
+                    if (c === "\n") {
+                        inM = Mode.Default;
+                        buffer = "";
+                    }
+                    break;
+                }
+                case Mode.MlComm: {
+                    buffer += c;
+                    if (buffer.endsWith([42,47].map(x => String.fromCharCode(x)).join(""))) {
+                        inM = Mode.Default;
+                        buffer = "";
+                    }
+                    break;
+                }
             }
-        })();
+            pos += 1;
+            if (c !== "\n") continue;
+            line += 1;
+            pos = 1;
+        }
+        return results;
     }
 }
