@@ -42,9 +42,9 @@ export class ExpressionSimple extends Expression {
  * @type {ExpressionContainer}
  */
 export class ExpressionContainer extends Expression {
-    constructor(n, a, l, p) {
-        super(n, a.length > 0 ? a[0].line : l, a.length > 0 ? a[0].pos : p);
-        this.value = a;
+    constructor(n, v, l, p) {
+        super(n, v.length > 0 ? v[0].line : l, v.length > 0 ? v[0].pos : p);
+        this.value = v;
     }
 }
 
