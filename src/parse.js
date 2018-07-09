@@ -1,5 +1,5 @@
 /**
- * https://nektro.github.io/basalt/src/parse.js
+ * https://github.com/nektro/basalt/blob/master/src/parse.js
  */
 //
 "use strict";

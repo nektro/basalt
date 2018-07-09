@@ -1,5 +1,5 @@
 /**
- * https://nektro.github.io/basalt/src/switch.js
+ * https://github.com/nektro/basalt/blob/master/src/switch.js
  */
 //
 "use strict";

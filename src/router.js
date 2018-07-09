@@ -1,5 +1,5 @@
 /**
- * https://nektro.github.io/basalt/src/router.js
+ * https://github.com/nektro/basalt/blob/master/src/router.js
  */
 //
 "use strict";

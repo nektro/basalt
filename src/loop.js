@@ -1,5 +1,5 @@
 /**
- * https://nektro.github.io/basalt/src/loop.js
+ * https://github.com/nektro/basalt/blob/master/src/loop.js
  */
 //
 "use strict";

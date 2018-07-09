@@ -1,5 +1,5 @@
 /**
- * https://nektro.github.io/basalt/src/language.js
+ * https://github.com/nektro/basalt/blob/master/src/language.js
  */
 //
 "use strict";

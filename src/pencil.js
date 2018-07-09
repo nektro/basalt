@@ -1,5 +1,5 @@
 /**
- * https://nektro.github.io/basalt/src/pencil.js
+ * https://github.com/nektro/basalt/blob/master/src/pencil.js
  */
 //
 "use strict";

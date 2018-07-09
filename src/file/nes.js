@@ -1,12 +1,14 @@
 /**
- * https://nektro.github.io/basalt/src/file/nes.js
+ * https://github.com/nektro/basalt/blob/master/src/file/nes.js
  */
 //
 "use strict";
-// parse a .nes file as a JS Object
-// Nintendo Entertainment System ROM
-// @see http://fms.komkon.org/EMUL8/NES.html
-// @see https://wiki.nesdev.com/w/index.php/INES
+/**
+ * parse a .nes file as a JS Object
+ * Nintendo Entertainment System ROM
+ * @see http://fms.komkon.org/EMUL8/NES.html
+ * @see https://wiki.nesdev.com/w/index.php/INES
+ */
 //
 export const NES_SIG = new Uint8Array([0x4E,0x45,0x53,0x1A]);
 //

@@ -1,5 +1,5 @@
 /**
- * https://nektro.github.io/basalt/src/read.js
+ * https://github.com/nektro/basalt/blob/master/src/read.js
  */
 //
 "use strict";

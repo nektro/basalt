@@ -1,5 +1,5 @@
 /**
- * https://nektro.github.io/basalt/src/pipe.js
+ * https://github.com/nektro/basalt/blob/master/src/pipe.js
  */
 //
 "use strict";

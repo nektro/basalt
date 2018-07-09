@@ -1,5 +1,5 @@
 /**
- * https://nektro.github.io/basalt/src/keyboard.js
+ * https://github.com/nektro/basalt/blob/master/src/keyboard.js
  */
 //
 "use strict";

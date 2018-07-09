@@ -1,5 +1,5 @@
 /**
- * https://nektro.github.io/basalt/src/lex.js
+ * https://github.com/nektro/basalt/blob/master/src/lex.js
  */
 //
 "use strict";
