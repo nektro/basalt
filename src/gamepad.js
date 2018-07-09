@@ -20,10 +20,11 @@ function handleGamepadEvent(gamepad, incoming) {
     }
 }
 
-function sendEvent(pad, type, prop, index, value) {
+function sendEvent(pad, mapping, type, prop, index, value) {
     window.dispatchEvent(new CustomEvent("x-gamepad:change", {
         detail: {
             gamepad: pad,
+            mapping,
             type,
             index,
             value
@@ -42,17 +43,17 @@ function checkForGamepadData() {
                 pad.axes.forEach((v,i) => {
                     if (v !== tracker[1][i]) {
                         tracker[1][i] = v;
-                        sendEvent(pad.index, "axis", "axis", i, v);
+                        sendEvent(pad.index, pad.mapping, "axis", "axis", i, v);
                     }
                 });
                 pad.buttons.forEach((v,i) => {
                     if (v.pressed !== tracker[2][0][i]) {
                         tracker[2][0][i] = v.pressed;
-                        sendEvent(pad.index, "button_press", "button", i, v.pressed);
+                        sendEvent(pad.index, pad.mapping, "button_press", "button", i, v.pressed);
                     }
                     if (v.value !== tracker[2][1][i]) {
                         tracker[2][1][i] = v.value;
-                        sendEvent(pad.index, "button_swivel", "button", i, v.value);
+                        sendEvent(pad.index, pad.mapping, "button_swivel", "button", i, v.value);
                     }
                 });
             }
