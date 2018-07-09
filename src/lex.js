@@ -31,7 +31,7 @@ export class Token {
         this.pos = p;
     }
     /**
-     * @return {String}
+     * @returns {String}
      */
     toString() {
         return `T_${this.type}(${this.value}){${this.line}:${this.pos}}`;
@@ -65,7 +65,7 @@ export class Lexer {
     }
     /**
      * @param  {Character} c
-     * @return {Boolean}
+     * @returns {Boolean}
      */
     isValidVarChar(c) {
         return false;
