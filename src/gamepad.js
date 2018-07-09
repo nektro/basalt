@@ -9,6 +9,7 @@ window.addEventListener("gamepaddisconnected", function(e) { handleGamepadEvent(
 
 //
 const controllers = new Map();
+export const target = new (class extends EventTarget { constructor() { super(); } })();
 
 //
 function handleGamepadEvent(gamepad, incoming) {
@@ -22,6 +23,15 @@ function handleGamepadEvent(gamepad, incoming) {
 
 function sendEvent(pad, mapping, type, prop, index, value) {
     window.dispatchEvent(new CustomEvent("x-gamepad:change", {
+        detail: {
+            gamepad: pad,
+            mapping,
+            type,
+            index,
+            value
+        }
+    }));
+    target.dispatchEvent(new CustomEvent("change", {
         detail: {
             gamepad: pad,
             mapping,
