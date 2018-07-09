@@ -4,9 +4,7 @@
 //
 "use strict";
 //
-import { Transform } from "./stream.js";
 import { TokenType } from "./lex.js";
-
 
 /**
  * @type {Expression}
@@ -64,161 +62,102 @@ export class ParserParseRule {
  * @type {Parser}
  */
 export class Parser {
-    constructor(hasFloats) {
-        this.rules = new Array();
-        this.hasFloats = hasFloats || false;
+    static _results_add_new_expression(list, index, rule_length, exp) {
+        list.splice(index, rule_length, exp);
+        list[index] = exp;
     }
-    /**
-     * @param {ParserParseRule} arr
-     * @param {Function<Array<Expression>,Integer>} cb
-     */
-    addRule(arr, cb) {
-        this.rules.push(new ParserParseRule(arr, cb));
+    constructor() {
+        this.rules = [[],[]];
+        this.aliases = [[],[]];
     }
-    /**
-     * @return {Boolean}
-     */
-    isValidIdentifier() {
-        return false;
-    }
-    /**
-     *
-     * @param  {Character} v
-     * @param  {Integer} l
-     * @param  {Integer} p
-     */
-    throwError(v, l, p) {
-        console.error(`ParserError: Invalid identifier "${v}" @ ${l}:${p}`);
-        return;
-    }
-    stream_token_to_expression() {
-        const that = this;
-        return new (class extends Transform {
-            read(data, done) {
-                if (done) {
-                    return this.write(data, done);
-                }
-                else {
-                    switch (data.type) {
-                        case TokenType.Keyword: return this.write(new ExpressionSimple("Key_" + data.value, data.line, data.pos, ""), false);
-                        case TokenType.Symbol:  return this.write(new ExpressionSimple("Sym_" + data.value, data.line, data.pos, ""), false);
-                        case TokenType.String:  return this.write(new ExpressionSimple("String", data.line, data.pos, data.value), false);
-                        case TokenType.Word: {
-                            if (that.isValidIdentifier(data.value)) return this.write(new ExpressionSimple("Identifier", data.line, data.pos, data.value), false);
-                            if ((/^([0-9]+)$/).test(data.value)) return this.write(new ExpressionSimple("Integer", data.line, data.pos, parseInt(data.value)), false);
-                            that.throwError(data.value, data.line, data.pos);
-                        }
-                    }
-                }
-            }
-        })();
-    }
-    stream_find_decimals() {
-        return new (class extends Transform {
-            constructor() {
-                super();
-                this.temp1 = null;
-                this.temp2 = null;
-            }
-            read(data, done) {
-                if (done) {
-                    return this.write(data, done);
-                }
-                else {
-                    if (this.temp1 === null) {
-                        if (data.type === "Integer") {
-                            this.temp1 = data;
-                            return;
-                        }
-                        this.write(data, done);
-                        return;
-                    }
-                    if (this.temp2 === null) {
-                        if (data.type === "Sym_.") {
-                            this.temp2 = data;
-                            return;
-                        }
-                        this.write(this.temp1, done);
-                        this.write(data, done);
-                        this.temp1 = null;
-                        return;
-                    }
-                    if (data.type === "Integer") {
-                        this.write(new ExpressionSimple("Decimal", this.temp1.line, this.temp1.pos, parseFloat(`${this.temp1.value}.${data.value}`)), false);
-                        this.temp1 = null;
-                        this.temp2 = null;
-                        return;
-                    }
+    async convert_tokens_to_expressions(token_list) {
+        return token_list.map(x => {
+            switch (x.type) {
+                case TokenType.Keyword: return new ExpressionSimple("K_" + x.value, "", x.line, x.pos);
+                case TokenType.Symbol:  return new ExpressionSimple("S_" + x.value, "", x.line, x.pos);
+                case TokenType.String:  return new ExpressionSimple("String", x.value, x.line, x.pos);
+                case TokenType.Word: {
+                    if (this.is_valid_identifier(x.value)) return new ExpressionSimple("Id", x.value, x.line, x.pos);
+                    if (new RegExp(/[0-9]+/, "g").test(x.value)) return new ExpressionSimple("Int", BigInt(x.value), x.line, x.pos);
+                    throw new Error(`ParserError: Invalid identifier "${x.value}" @ ${x.line}:${x.pos}`);
                 }
             }
         });
     }
-    /**
-     * @return {Transform<Token,Expression>}
-     */
-    getTransform() {
-        let result = new Transform();
-        result = result.pipe(this.stream_token_to_expression());
+    is_valid_identifier(word) {
+        return false;
+    }
+    async parse(exp_list) {
+        const results = [];
 
-        if (this.hasFloats) {
-            result = result.pipe(this.stream_find_decimals());
+        // do once rules
+        for (const exp of exp_list) {
+            results.push(exp);
+
+            for (const rule of this.rules[0]) {
+                this._parse_test_rule_at_index(results, rule, results.length);
+            }
+            // this._parse_test_all_rules_of_type(results, 0, results.length);
         }
 
-        const that = this;
-        const tstream = new (class TransformParser extends Transform {
-            constructor() {
-                super();
-                this.stack = new Array();
-            }
-            read(data, done) {
-                if (done) {
-                    if (this.stack.length !== 1) {
-                        console.error(this.stack);
-                        console.error("ParserError: Incomplete AST after reaching end of file!");
-                        return;
-                    }
-                    else {
-                        this.write(this.stack[0], done);
-                        return;
-                    }
-                }
-
-                this.stack.push(data);
-
-                loop_1:
-                for (let j = 0; j < that.rules.length; j++) {
-                    const rule = that.rules[j];
-                    const l = this.stack.length;
-                    const i = l - rule.keys.length;
-                    const b = this.stack.slice(l - rule.keys.length, l);
-
-                    if (rule.keys.length > this.stack.length) {
-                        continue;
-                    }
-                    for (let i = 0; i < rule.keys.length; i++) {
-                        const k = rule.keys[i];
-                        if (typeof k === "string") {
-                            if (b[i].type !== k) {
-                                continue loop_1;
-                            }
-                        }
-                        if (typeof k === "object") {
-                            if (!(k.includes(b[i].type))) {
-                                continue loop_1;
-                            }
-                        }
-                    }
-
-                    const exp = rule.onSuccess(this.stack, i);
-                    new Array(rule.keys.length).fill(0).forEach(() => this.stack.pop());
-                    this.stack.push(exp);
-                    j = -1;
+        // do looping rules
+        while (true) {
+            const length = results.length;
+            
+            for (let i = 0; i <= results.length; i++) {
+                for (const rule of this.rules[1]) {
+                    this._parse_test_rule_at_index(results, rule, i);
                 }
             }
-        })();
+            if (length === results.length) {
+                break;
+            }
+        }
 
-        result = result.pipe(tstream);
+        // error if parsing failed / insufficient rules were added
+        if (results.length > 1) {
+            console.debug(results);
+            throw new Error("ParserError: Incomplete AST after trying all grammar rules!");
+        }
+        return results[0];
+    }
+    _parse_test_rule_at_index(token_list, rule, index) {
+        const l = rule.keys.length;
+        const i = index - l;
+        if (i < 0) return;
+        if (i + l > token_list.length) return;
+        if (this._parse_should_replace(token_list, rule, i)) {
+            Parser._results_add_new_expression(token_list, i, l, rule.onSuccess(token_list, i));
+        }
+    }
+    _parse_should_replace(tokens, rule, start) {
+        for (let i = 0; i < rule.keys.length; i++) {
+            const key = rule.keys[i];
+            const token_checking = tokens[start+i];
+            const is_key_raw = token_checking.type === key;
+            const is_key_alias = this.aliases[0].includes(key);
+            const key_is_alias = is_key_alias && this.aliases[1][this.aliases[0].indexOf(key)].includes(token_checking.type);
 
-        return result;
+            if (!(is_key_raw || key_is_alias)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    /**
+     * @param {Array<String>} pattern
+     * @param {NewParseRuleCallback} callback
+     * @param {Boolean} once
+     */
+    addRule(pattern, callback, once=false) {
+        this.rules[once ? 0 : 1].push(new ParserParseRule(pattern, callback));
+    }
+    /**
+     * @param {String} key
+     * @param {Array<String>} alternates
+     */
+    addAlias(key, alternates) {
+        this.aliases[0].push(key);
+        this.aliases[1].push(alternates);
     }
 }
