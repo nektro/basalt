@@ -32,8 +32,8 @@ export class ExpressionSimple extends Expression {
      * @param {Integer} p
      * @param {<T>} v
      */
-    constructor(n, l, p, v) {
-        super(n, l, p);
+    constructor(n, v, l, p) {
+        super(n, v instanceof Expression ? v.line : l, v instanceof Expression ? v.pos : p);
         this.value = v;
     }
 }
