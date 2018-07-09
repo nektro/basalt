@@ -7,6 +7,9 @@
 import { Transform } from "./stream.js";
 
 
+/**
+ * @type {TokenType}
+ */
 export const TokenType = Object.freeze({
     Keyword: "Keyword",
     Symbol: "Symbol",
@@ -38,6 +41,9 @@ export class Token {
     }
 }
 
+/**
+ * @type {Mode}
+ */
 export const Mode = Object.freeze({
     Default: 0,
     String: 1,
