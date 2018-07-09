@@ -82,8 +82,7 @@ export class Lexer {
      * @param  {Number} p
      */
     throwError(c, l, p) {
-        console.error(`LexerError: Invalid character "${c}" @ ${l}:${p}`);
-        return;
+        throw new Error(`LexerError: Invalid character "${c}" @ ${l}:${p}`);
     }
     /**
      * @return {Transform<Character,Token>}
