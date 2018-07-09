@@ -25,7 +25,7 @@ export class Expression {
 }
 
 /**
- * @type {ExpressionSimple<T>}
+ * @type {ExpressionSimple}
  */
 export class ExpressionSimple extends Expression {
     /**
