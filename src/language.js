@@ -4,9 +4,8 @@
 //
 "use strict";
 //
-import { Transform } from "./stream.js";
 import { Lexer } from "./lex.js";
-import { Parser } from "./parse.js";
+import { Parser, ExpressionContainer } from "./parse.js";
 
 
 /**
@@ -14,18 +13,17 @@ import { Parser } from "./parse.js";
  */
 export class Language {
     /**
-     * @param {Array<String>}  keys
-     * @param {Array<Character>}  syms
-     * @param {Array<Character>}  strs
-     * @param {Boolean}  hLC
-     * @param {Boolean}  hMC
-     * @param {Boolean} hasFloats
+     * @param {Array<String>} keys
+     * @param {Array<String>} symbols
+     * @param {Array<String>} strings
+     * @param {boolean} hasLineComments
+     * @param {boolean} hasMultiComments
      */
-    constructor(keys, syms, strs, hLC, hMC, hasFloats) {
+    constructor(keys, symbols, strings, hasLineComments, hasMultiComments) {
         const that = this;
         this.lexer = new (class extends Lexer {
             constructor() {
-                super(keys, syms, strs, hLC, hMC);
+                super(keys, symbols, strings, hasLineComments, hasMultiComments);
             }
             isValidVarChar(c) {
                 return that.isValidVarChar(c);
@@ -33,77 +31,43 @@ export class Language {
         })();
         this.parser = new (class extends Parser {
             constructor() {
-                super(hasFloats);
+                super();
             }
-            isValidIdentifier(word) {
+            is_valid_identifier(word) {
                 return that.isValidIdentifier(word);
             }
         })();
-        this.compile = function() {
-            return new (class extends Transform {
-                read(data, done) {
-                    this.write(((ex) => {
-                        return that.compileExpression(ex);
-                    })(data), done);
-                }
-            })();
-        };
     }
     /**
-     * @param  {Character} c
-     * @return {Boolean}
+     * @param {String} c
+     * @returns {Boolean}
      */
     isValidVarChar(c) {
         return false;
     }
     /**
-     * @return {Transform<Character,Token>}
+     * @param {String} word
+     * @returns {Boolean}
      */
-    lex() {
-        return this.lexer.getTransform();
-    }
-    /**
-     * @param  {String}  word
-     * @return {Boolean}
-     */
-    isValidIdentifier(word) {
+    is_valid_identifier(word) {
         return false;
     }
     /**
-     * @return {Transform<Token,Expression>}
+     * @param {ExpressionContainer} expression
+     * @returns {String|Uint8Array}
      */
-    parse() {
-        return this.parser.getTransform();
+    transform(expression) {
+        throw new Error("No expression transformation found!");
     }
     /**
-     * @param  {Expression} exp
-     * @return {?}
+     * @param {String} src_text
+     * @returns {Promise<String|Uint8Array>}
      */
-    compileExpression(exp) {
-        throw new Error("CompileError: method not defined.");
-    }
-    /**
-     * @return {Transform<Byte,?}
-     */
-    transform() {
-        return new Transform()
-        .pipe(this.lex())
-        .pipe(this.parse())
-        .pipe(this.compile());
-    }
-    /**
-     * @param  {ReadableStream} readable
-     * @return {Promise<?>}
-     */
-    stream(readable) {
-        return new Promise((resolve) => {
-            Transform.start(readable)
-            .pipe(this.transform())
-            .pipe(new (class extends Transform {
-                read(data) {
-                    resolve(data);
-                }
-            })());
-        });
+    async parse(src_text) {
+        return Promise.resolve(src_text)
+        .then(x => this.lexer.parse(x))
+        .then(x => this.parser.convert_tokens_to_expressions(x))
+        .then(x => this.parser.parse(x))
+        .then(x => this.transform(x));
     }
 }
