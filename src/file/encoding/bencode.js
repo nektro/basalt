@@ -70,3 +70,19 @@ function read_integer(ui8a) {
     pipe(ui8a, _read_Uint8); // read the "e";
     return int;
 }
+
+//
+export function encode(obj) {
+    if (obj instanceof Map) {
+        return `d${[...obj].reduce((ac,cv) => ac + encode(cv[0]) + encode(cv[1]), "")}e`;
+    }
+    if (obj instanceof Array) {
+        return `l${[...obj].reduce((ac,cv) => ac + encode(cv), "")}e`;
+    }
+    if (typeof obj === "number") {
+        return `i${obj}e`;
+    }
+    if (typeof obj === "string") {
+        return `${obj.length}:${obj}`;
+    }
+}
