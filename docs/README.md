@@ -18,3 +18,4 @@ import { pipe } from "https://rawgit.com/nektro/basalt/<commit_hash>/src/pipe.js
 The following is a list of the libraries currently available in Basalt. The links below link to that library's subsequent documentation that will contain links to source links and examples.
 
 - [`create_element`](create_element.md)
+- [`pencil.js`](pencil.md)

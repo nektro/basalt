@@ -1,0 +1,120 @@
+# src/pencil.js
+
+## `class Pencil`
+-  `constructor(context2d)`
+    - `context2d`
+        - `CanvasRenderingContext2D`
+        - The `<canvas>` context to assign to this `Pencil` instance
+- `clear()`
+    - Reset the entire `<canvas>` to be blank.
+    - Parameters
+        - None
+    - Returns
+        - None
+- `drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh, rad)`
+    - Draw an [`CanvasImageSource`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasImageSource) on the `<canvas`>
+    - Parameters
+        - `image`
+        - `sx`
+            - `Number`
+            - Source X
+        - `sy`
+            - `Number`
+            - Source Y
+        - `sw`
+            - `Number`
+            - Source Width
+        - `sh`
+            - `Number`
+            - Source Height
+        - `dx`
+            - `Number`
+            - Destination X
+        - `dy`
+            - `Number`
+            - Destination Y
+        - `dw`
+            - `Number`
+            - Destination Width
+        - `dh`
+            - `Number`
+            - Destination Height
+        - `rad`
+            - `Number`
+            - Angle in radians to draw `image` at
+    - Returns
+        - None
+    - [@see `CanvasRenderingContext2D.drawImage`]( https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage)
+- `drawShape(s, m, c)`
+    - Draw a shape from the [`geometry`](geometry.md) module
+    - Parameters
+        - `s`
+            - `Point|Circle|Line|Rectangle|Polygon`
+            - Shape to draw
+        - `m`
+            - `String`
+            - Drawing mode. `"fill"` or `"stroke"`.
+        - `c`
+            - `String`
+            - Color
+    - Returns
+        - None
+- `drawPolygon(pts, m, c)`
+    - Draw a polygon based on arbitray `Point`s
+    - Paramters
+        - `pts`
+            - `Array<Point>`
+            - List of polygon vertexes
+        - `m`
+            - `String`
+            - Drawing mode. `"fill"` or `"stroke"`.
+        - `c`
+            - `String`
+            - Color
+    - Returns
+        - None
+- `drawRect(x, y, w, h, m, c, a)`
+    - Draw a rectangle
+    - Parameters
+        - `x`
+            - `Number`
+            - Top-left X
+        - `y`
+            - `Number`
+            - Top-left Y
+        - `w`
+            - `Number`
+            - Width
+        - `h`
+            - `Number`
+            - Height
+        - `m`
+            - `String`
+            - Drawing mode. `"fill"` or `"stroke"`.
+        - `c`
+            - `String`
+            - Color
+        - `a`
+            - `String`
+            - Alpha
+- `drawText(x, y, m, t, c, f)`
+    - Draw text on to the canvas
+    - Parameters
+        - `x`
+            - `Number`
+            - Bottom-left X
+        - `y`
+            - `Number`
+            - Bottom-left Y
+        - `m`
+            - `String`
+            - Drawing mode. `"fill"` or `"stroke"`.
+        - `t`
+            - `String`
+            - The text
+        - `c`
+            - `String`
+            - Color
+        - `f`
+            - `String`
+            - Font
