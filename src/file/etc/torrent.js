@@ -16,7 +16,7 @@ import * as bencode from "../encoding/bencode.js";
 export function decode(ui8a) {
     return new (class Torrent {
         constructor() {
-            const properties = pipe(ui8a, bencode.read_dictionary);
+            const properties = pipe(ui8a, bencode.decode);
             this.announce = properties.get("announce");
             this.announce_list = properties.get("announce-list").map(v => v[0]);
             this.creation_date = properties.get("creation date");

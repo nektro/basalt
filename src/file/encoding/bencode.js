@@ -18,7 +18,10 @@ const code_I = 0x69;
 const code_L = 0x6C;
 
 //
-export function read_dictionary(ui8a) {
+export function decode(ui8a) {
+    return pipe(ui8a, read_dictionary);
+}
+function read_dictionary(ui8a) {
     console.assert(pipe(ui8a, _read_Uint8) === code_D, "Dictionary must start with \"d\"!");
     const dict = new Map();
     while (pipe(ui8a, _peek_Uint8) !== code_E) {
@@ -41,13 +44,13 @@ function get_type_from_byte(i) {
     if (i === code_D) return read_dictionary;
     throw new Error(`unknown type "${i}"`);
 }
-export function read_string(ui8a) {
+function read_string(ui8a) {
     let a = pipe(ui8a, _find_Uint8(code_colon));
     let b = pipe(ui8a, _read_string(a), parseInt);
     (pipe(ui8a, _read_Uint8)); // read the ":"
     return pipe(ui8a, _read_string(b));
 }
-export function read_list(ui8a) {
+function read_list(ui8a) {
     console.assert(pipe(ui8a, _read_Uint8) === code_L, "List must start with \"l\"!");
     const retv = new Array();
     while (pipe(ui8a, _peek_Uint8) !== code_E) {
@@ -60,7 +63,7 @@ function read_list_v(ui8a) {
     let ty_f = (pipe(ui8a, _peek_Uint8, get_type_from_byte));
     return (pipe(ui8a, ty_f));
 }
-export function read_integer(ui8a) {
+function read_integer(ui8a) {
     console.assert(pipe(ui8a, _read_Uint8) === code_I, "Integer must start with \"i\"!");
     const len = (pipe(ui8a, _find_Uint8(code_E)));
     const int = (pipe(ui8a, _read_string(len), parseInt));
