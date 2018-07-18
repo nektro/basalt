@@ -30,6 +30,9 @@ export function decode(ui8a) {
             this.piece_hashes = pipe(info.get("pieces").split(""), _array_group(20)).map(v => v.map(w => _char_to_hex(w)).reduce((c,v) => c+v, ""));
             this.info_hash = pipe(info, bencode.encode, _string_to_uint8a, sha1);
         }
+        getMagnetLink() {
+            return `magnet:?xt=urn:btih:${this.info_hash}&dn=${encodeURIComponent(this.name)}`;
+        }
     })();
 }
 function _array_group(size) {
