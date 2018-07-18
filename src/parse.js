@@ -12,8 +12,8 @@ import { TokenType } from "./lex.js";
 export class Expression {
     /**
      * @param {String} t
-     * @param {Integer} l
-     * @param {Integer} p
+     * @param {Number} l
+     * @param {Number} p
      */
     constructor(t, l, p) {
         this.type = t;
@@ -28,8 +28,8 @@ export class Expression {
 export class ExpressionSimple extends Expression {
     /**
      * @param {String} n
-     * @param {Integer} l
-     * @param {Integer} p
+     * @param {Number} l
+     * @param {Number} p
      * @param {<T>} v
      */
     constructor(n, v, l, p) {
