@@ -3,9 +3,11 @@
  */
 //
 "use strict";
-// parse a .gb file as a JS Object
-// Nintendo GameBoy ROM
-// @see http://bgb.bircd.org/pandocs.htm
+/**
+ * parse a .gb file as a JS Object
+ * Nintendo GameBoy ROM
+ * @see http://bgb.bircd.org/pandocs.htm
+ */
 //
 export const NINTENDO_LOGO = new Uint8Array(("ceed6666cc0d000b03730083000c000d0008111f8889000edccc6ee6ddddd999bbbb67636e0eecccdddc999fbbb9333e").match(/[0-9a-f]{1,2}/g).map(x => parseInt(x,16)));
 //
