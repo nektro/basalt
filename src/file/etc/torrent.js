@@ -1,5 +1,5 @@
 /**
- * https://github.com/nektro/basalt/blob/master/src/file/torrent.js
+ * https://github.com/nektro/basalt/blob/master/src/file/etc/torrent.js
  */
 //
 "use strict";
