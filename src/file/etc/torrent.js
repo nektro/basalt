@@ -9,6 +9,7 @@
  * @see http://fileformats.wikia.com/wiki/Torrent_file
  */
 //
+import "https://unpkg.com/js-sha1@0.6.0/build/sha1.min.js";
 import { pipe } from "../../pipe.js";
 import * as bencode from "../encoding/bencode.js";
 
@@ -27,6 +28,7 @@ export function decode(ui8a) {
             this.name = info.get("name");
             this.pieces = info.get("piece length");
             this.piece_hashes = pipe(info.get("pieces").split(""), _array_group(20)).map(v => v.map(w => _char_to_hex(w)).reduce((c,v) => c+v, ""));
+            this.info_hash = pipe(info, bencode.encode, _string_to_uint8a, sha1);
         }
     })();
 }
@@ -39,4 +41,7 @@ function _array_group(size) {
 }
 function _char_to_hex(c) {
     return c.charCodeAt(0).toString(16).padStart(2,"0");
+}
+function _string_to_uint8a(s) {
+    return new Uint8Array(s.split("").map(v => v.charCodeAt(0)));
 }
