@@ -1,8 +1,0 @@
-(
-    h1("What is modules.js?")
-    hr
-    p("Modules.js is a new JavaScript library built with ES 6+ modules that provides utilities and helpers for doing a wide range of tasks previously never thought to be made for the web. Such helpers include libraries for compiling source code, parsing binary file types, streaming data, and more.")
-    
-    h2("About These Docs")
-    p("These docs are meant to serve as a central hub for documenting and teaching how modules.js works and how many modules can be used together. Also they serve to show the philosphy of why certain modules are laid out the way they are as well as providing usage examples and linking back to source files for current/future contributors.")
-)
