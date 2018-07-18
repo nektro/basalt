@@ -1,4 +1,4 @@
-# `create_element.js`
+# src/create_element.js
 
 ## `create_element(name, attributes, children, events)`
 - Parameters
