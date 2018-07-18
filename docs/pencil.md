@@ -1,61 +1,68 @@
 # src/pencil.js
 
+[^1]: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D
+[^2]: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas
+[^3]: https://developer.mozilla.org/en-US/docs/Web/API/CanvasImageSource
+[^4]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number
+[^5]: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage
+[^6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String
+
 ## `class Pencil`
 -  `constructor(context2d)`
     - `context2d`
-        - `CanvasRenderingContext2D`
-        - The `<canvas>` context to assign to this `Pencil` instance
+        - `CanvasRenderingContext2D`[^1]
+        - The `<canvas>`[^2] context to assign to this `Pencil` instance
 - `clear()`
-    - Reset the entire `<canvas>` to be blank.
+    - Reset the entire `<canvas>`[^2] to be blank.
     - Parameters
         - None
     - Returns
         - None
 - `drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh, rad)`
-    - Draw an [`CanvasImageSource`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasImageSource) on the `<canvas`>
+    - Draw an `CanvasImageSource`[^3] on the `<canvas>`[^2]
     - Parameters
         - `image`
         - `sx`
-            - `Number`
+            - `Number`[^4]
             - Source X
         - `sy`
-            - `Number`
+            - `Number`[^4]
             - Source Y
         - `sw`
-            - `Number`
+            - `Number`[^4]
             - Source Width
         - `sh`
-            - `Number`
+            - `Number`[^4]
             - Source Height
         - `dx`
-            - `Number`
+            - `Number`[^4]
             - Destination X
         - `dy`
-            - `Number`
+            - `Number`[^4]
             - Destination Y
         - `dw`
-            - `Number`
+            - `Number`[^4]
             - Destination Width
         - `dh`
-            - `Number`
+            - `Number`[^4]
             - Destination Height
         - `rad`
-            - `Number`
+            - `Number`[^4]
             - Angle in radians to draw `image` at
     - Returns
         - None
-    - [@see `CanvasRenderingContext2D.drawImage`]( https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage)
+    - See `CanvasReneringContext2D.drawImage`[^5]
 - `drawShape(s, m, c)`
     - Draw a shape from the [`geometry`](geometry.md) module
     - Parameters
         - `s`
-            - `Point|Circle|Line|Rectangle|Polygon`
+            - [`Point|Circle|Line|Rectangle|Polygon`](geometry.md)
             - Shape to draw
         - `m`
-            - `String`
+            - `String`[^6]
             - Drawing mode. `"fill"` or `"stroke"`.
         - `c`
-            - `String`
+            - `String`[^6]
             - Color
     - Returns
         - None
@@ -66,10 +73,10 @@
             - `Array<Point>`
             - List of polygon vertexes
         - `m`
-            - `String`
+            - `String`[^6]
             - Drawing mode. `"fill"` or `"stroke"`.
         - `c`
-            - `String`
+            - `String`[^6]
             - Color
     - Returns
         - None
@@ -77,44 +84,44 @@
     - Draw a rectangle
     - Parameters
         - `x`
-            - `Number`
+            - `Number`[^4]
             - Top-left X
         - `y`
-            - `Number`
+            - `Number`[^4]
             - Top-left Y
         - `w`
-            - `Number`
+            - `Number`[^4]
             - Width
         - `h`
-            - `Number`
+            - `Number`[^4]
             - Height
         - `m`
-            - `String`
+            - `String`[^6]
             - Drawing mode. `"fill"` or `"stroke"`.
         - `c`
-            - `String`
+            - `String`[^6]
             - Color
         - `a`
-            - `String`
+            - `String`[^6]
             - Alpha
 - `drawText(x, y, m, t, c, f)`
     - Draw text on to the canvas
     - Parameters
         - `x`
-            - `Number`
+            - `Number`[^4]
             - Bottom-left X
         - `y`
-            - `Number`
+            - `Number`[^4]
             - Bottom-left Y
         - `m`
-            - `String`
+            - `String`[^6]
             - Drawing mode. `"fill"` or `"stroke"`.
         - `t`
-            - `String`
+            - `String`[^6]
             - The text
         - `c`
-            - `String`
+            - `String`[^6]
             - Color
         - `f`
-            - `String`
+            - `String`[^6]
             - Font
