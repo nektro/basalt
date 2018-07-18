@@ -31,7 +31,7 @@ export function decode(ui8a) {
             this.info_hash = pipe(info, bencode.encode, _string_to_uint8a, sha1);
         }
         getMagnetLink() {
-            return `magnet:?xt=urn:btih:${this.info_hash}&dn=${encodeURIComponent(this.name)}`;
+            return `magnet:?xt=urn:btih:${this.info_hash}&dn=${encodeURIComponent(this.name)}${this.announce_list.reduce((ac,cv) => `${ac}&tr=${encodeURIComponent(cv)}`, "")}`;
         }
     })();
 }
