@@ -1,5 +1,6 @@
 /**
  * https://github.com/nektro/basalt/blob/master/src/create_element.js
+ * https://github.com/nektro/basalt/blob/master/docs/create_element.md
  */
 //
 "use strict";
