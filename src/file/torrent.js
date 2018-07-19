@@ -1,5 +1,5 @@
 /**
- * https://github.com/nektro/basalt/blob/master/src/file/etc/torrent.js
+ * https://github.com/nektro/basalt/blob/master/src/file/torrent.js
  */
 //
 "use strict";
@@ -10,8 +10,8 @@
  */
 //
 import "https://unpkg.com/js-sha1@0.6.0/build/sha1.min.js";
-import { pipe } from "../../pipe.js";
-import * as bencode from "../encoding/bencode.js";
+import { pipe } from "../pipe.js";
+import * as bencode from "./encoding/bencode.js";
 
 //
 export function decode(ui8a) {
