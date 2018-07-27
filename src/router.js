@@ -70,7 +70,7 @@ export default class Router {
             this.gotoPage(location.hash.substring(1));
         }
         // set new root element
-        if (ch instanceof Element) {
+        if (ch instanceof HTMLElement) {
             this.element = ch;
         }
     }
