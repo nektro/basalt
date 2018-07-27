@@ -53,8 +53,8 @@ export default class Router {
         });
     }
     async gotoPage(pn) {
-        this.getPageContent(pn).then((x) => {
-            this.setPageContent(...x);
+        return this.getPageContent(pn).then((x) => {
+            return this.setPageContent(...x);
         });
     }
     setPageContent(con) {
