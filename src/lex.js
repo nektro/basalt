@@ -55,8 +55,8 @@ export const Mode = Object.freeze({
 export class Lexer {
     /**
      * @param {Array<String>} keys
-     * @param {Array<Character>} syms
-     * @param {Array<Character>} strs
+     * @param {Array<String>} syms
+     * @param {Array<String>} strs
      * @param {Boolean} hLC
      * @param {Boolean} hMC
      */
@@ -68,14 +68,14 @@ export class Lexer {
         this.hasMultiComments = hMC;
     }
     /**
-     * @param  {Character} c
+     * @param  {String} c
      * @returns {Boolean}
      */
     isValidVarChar(c) {
         return false;
     }
     /**
-     * @param  {Character} c
+     * @param  {String} c
      * @param  {Number} l
      * @param  {Number} p
      */
