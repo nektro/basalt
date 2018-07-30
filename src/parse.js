@@ -145,6 +145,12 @@ export class Parser {
         return true;
     }
     /**
+     * @callback NewParseRuleCallback
+     * @param {Array<Expression>} list
+     * @param {Number} index
+     * @returns {Expression}
+     */
+    /**
      * @param {Array<String>} pattern
      * @param {NewParseRuleCallback} callback
      * @param {Boolean} once
