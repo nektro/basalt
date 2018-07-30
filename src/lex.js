@@ -111,7 +111,7 @@ export class Lexer {
                         }
                         else
                         if (!(this.symbols.includes(c))) {
-                            this.throwError(c, line, pos, results);
+                            this.throwError(c, line, pos);
                             return;
                         }
                     }
@@ -125,7 +125,7 @@ export class Lexer {
                             }
                             else
                             if (!(this.symbols.includes("*"))) {
-                                this.throwError("*", line, pos, results);
+                                this.throwError("*", line, pos);
                             }
                         }
                     }
@@ -133,19 +133,19 @@ export class Lexer {
                     if (c === " " || c === "\n" || this.symbols.includes(c)) {
                         if (buffer.length > 0) {
                             if (this.symbols.includes(buffer)) { // for / and *
-                                results.push(new Token(TokenType.Symbol, buffer, line, pos-buffer.length, 3));
+                                results.push(new Token(TokenType.Symbol, buffer, line, pos-buffer.length));
                             }
                             else
                             if (this.keywords.includes(buffer)) {
-                                results.push(new Token(TokenType.Keyword, buffer, line, pos-buffer.length, 1));
+                                results.push(new Token(TokenType.Keyword, buffer, line, pos-buffer.length));
                             }
                             else {
-                                results.push(new Token(TokenType.Word, buffer, line, pos-buffer.length, 2));
+                                results.push(new Token(TokenType.Word, buffer, line, pos-buffer.length));
                             }
                             buffer = "";
                         }
                         if (this.symbols.includes(c)) {
-                            results.push(new Token(TokenType.Symbol, c, line, pos+1, 3));
+                            results.push(new Token(TokenType.Symbol, c, line, pos+1));
                         }
                     }
                     else
@@ -158,7 +158,7 @@ export class Lexer {
                         inM = Mode.String;
                     }
                     else {
-                        this.throwError(c, line, pos, results);
+                        this.throwError(c, line, pos);
                         return;
                     }
                     break;
@@ -168,7 +168,7 @@ export class Lexer {
 
                     if (c == buffer.charAt(0)) {
                         if ((!(buffer.endsWith("\\" + c))) != (buffer.endsWith("\\\\" + c))) {
-                            results.push(new Token(TokenType.String, buffer, line, pos - buffer.length, 4));
+                            results.push(new Token(TokenType.String, buffer, line, pos - buffer.length));
                             buffer = "";
                             inM = Mode.Default;
                         }
