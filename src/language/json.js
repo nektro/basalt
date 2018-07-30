@@ -16,7 +16,6 @@ export default new (class extends Language {
             ["\""],
             true,
             true,
-            true
         );
 
         const VALUE = ["String","Decimal","Integer","Object","Array","Key_true","Key_false","Key_null"];
