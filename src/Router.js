@@ -1,5 +1,6 @@
 /**
  * https://github.com/nektro/basalt/blob/master/src/router.js
+ * https://github.com/nektro/basalt/blob/master/docs/router.md
  */
 //
 "use strict";
@@ -53,8 +54,8 @@ export default class Router {
         });
     }
     async gotoPage(pn) {
-        this.getPageContent(pn).then((x) => {
-            this.setPageContent(...x);
+        return this.getPageContent(pn).then((x) => {
+            return this.setPageContent(...x);
         });
     }
     setPageContent(con) {
@@ -70,7 +71,7 @@ export default class Router {
             this.gotoPage(location.hash.substring(1));
         }
         // set new root element
-        if (ch instanceof Element) {
+        if (ch instanceof HTMLElement) {
             this.element = ch;
         }
     }
