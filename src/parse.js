@@ -28,9 +28,9 @@ export class Expression {
 export class ExpressionSimple extends Expression {
     /**
      * @param {String} n
+     * @param {String|Number|Expression} v
      * @param {Number} l
      * @param {Number} p
-     * @param {<T>} v
      */
     constructor(n, v, l, p) {
         super(n, v instanceof Expression ? v.line : l, v instanceof Expression ? v.pos : p);
