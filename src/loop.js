@@ -11,9 +11,9 @@
  */
 export class Loop {
     /**
-     * @param {Integer} min
-     * @param {Integer} max
-     * @param {Integer} start
+     * @param {Number} min
+     * @param {Number} max
+     * @param {Number} start
      */
     constructor(min, max, start) {
         this.min = min;
