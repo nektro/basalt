@@ -14,9 +14,9 @@ export const arr_sum = (a) => a.reduce((ac,cv) => ac + cv, 0);
 export const ta_toDV = (a) => new DataView(a.buffer);
 export const ta_matches = (t) => (a) => a.every((v,i) => v === t[i]);
 
-export const dv_gUi8  = (le=false) => (a) => a.getUint8(0, le);
-export const dv_gUi16 = (le=false) => (a) => a.getUint16(0, le);
-export const dv_gUi32 = (le=false) => (a) => a.getUint32(0, le);
+const dv_gUi8  = (le=false) => (a) => a.getUint8(0, le);
+const dv_gUi16 = (le=false) => (a) => a.getUint16(0, le);
+const dv_gUi32 = (le=false) => (a) => a.getUint32(0, le);
 
 //
 export const _fix = (a) => ( a.p |= 0, a );
