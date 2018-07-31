@@ -27,6 +27,7 @@ export const _read_Uint8    =        (a) => pipe(a, _read_raw(1), ta_toDV, dv_gU
 export const _read_Uint16   =        (a) => pipe(a, _read_raw(2), ta_toDV, dv_gUi16());
 export const _read_Uint32   =        (a) => pipe(a, _read_raw(4), ta_toDV, dv_gUi32());
 export const _read_Uint16le =        (a) => pipe(a, _read_raw(2), ta_toDV, dv_gUi16(true));
+export const _read_Uint32le =        (a) => pipe(a, _read_raw(4), ta_toDV, dv_gUi32(true));
 
 //
 export const _find_Uint8 = (b) => (a) => a.slice(a.p).findIndex(v => v === b);
