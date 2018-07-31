@@ -42,6 +42,12 @@ export class ExpressionSimple extends Expression {
  * @type {ExpressionContainer}
  */
 export class ExpressionContainer extends Expression {
+    /**
+     * @param {String} n
+     * @param {Array<Expression>} v
+     * @param {Number} l
+     * @param {Number} p
+     */
     constructor(n, v, l, p) {
         super(n, v.length > 0 ? v[0].line : l, v.length > 0 ? v[0].pos : p);
         this.value = v;
