@@ -7,3 +7,5 @@
 ![prs](https://img.shields.io/github/issues-pr/nektro/basalt.svg)
 
 ECMAScript modules for building the modern web.
+
+Read the [docs](docs/) for more information on every module, and how to use them.
