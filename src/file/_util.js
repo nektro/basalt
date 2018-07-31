@@ -10,6 +10,7 @@ import { pipe } from "../pipe.js";
 export const arr_toChars = (a) => Array.from(a).map(x => pipe(x, String.fromCharCode));
 export const arr_join = (a) => a.join("");
 export const arr_sum = (a) => a.reduce((ac,cv) => ac + cv, 0);
+export const arr_reverse = (a) => a.reverse();
 
 export const ta_toDV = (a) => new DataView(a.buffer);
 export const ta_matches = (t) => (a) => a.every((v,i) => v === t[i]);
