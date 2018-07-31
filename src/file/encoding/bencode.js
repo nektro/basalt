@@ -8,7 +8,7 @@
  */
 //
 import { pipe } from "./../../pipe.js";
-import { _read_Uint8, _peek_Uint8, _find_Uint8, _read_string } from "../_util.js";
+import { _fix, _peek_Uint8, _read_Uint8, _find_Uint8, _read_string } from "../_util.js";
 
 //
 const code_colon = 0x3a;
@@ -19,7 +19,7 @@ const code_L = 0x6C;
 
 //
 export function decode(ui8a) {
-    return pipe(ui8a, read_dictionary);
+    return pipe(ui8a, pipe(ui8a, _fix, _peek_Uint8, get_type_from_byte));
 }
 function read_dictionary(ui8a) {
     console.assert(pipe(ui8a, _read_Uint8) === code_D, "Dictionary must start with \"d\"!");
