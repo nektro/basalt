@@ -5,6 +5,7 @@
 "use strict";
 //
 
+
 /**
  * @type {TokenType}
  */
