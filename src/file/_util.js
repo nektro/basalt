@@ -19,7 +19,7 @@ export const dv_gUi16 = (le=false) => (a) => a.getUint16(0, le);
 export const dv_gUi32 = (le=false) => (a) => a.getUint32(0, le);
 
 //
-const _fix = (a) => ( a.p |= 0, a );
+export const _fix = (a) => ( a.p |= 0, a );
 export const _read_raw      = (l) => (a) => pipe(a, _fix, (x) => x.slice(x.p, x.p+=l));
 export const _read_string   = (l) => (a) => pipe(a, _read_raw(l), arr_toChars, arr_join);
 export const _read_Uint8    =        (a) => pipe(a, _read_raw(1), ta_toDV, dv_gUi8());
