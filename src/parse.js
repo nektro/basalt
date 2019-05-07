@@ -70,7 +70,6 @@ export class ParserParseRule {
 export class Parser {
     static _results_add_new_expression(list, index, rule_length, exp) {
         list.splice(index, rule_length, exp);
-        list[index] = exp;
     }
     constructor() {
         this.rules = [[],[]];
@@ -103,7 +102,6 @@ export class Parser {
             for (const rule of this.rules[0]) {
                 this._parse_test_rule_at_index(results, rule, results.length);
             }
-            // this._parse_test_all_rules_of_type(results, 0, results.length);
         }
 
         // do looping rules
