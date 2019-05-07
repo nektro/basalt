@@ -82,8 +82,12 @@ export class Parser {
                 case TokenType.Symbol:  return new ExpressionSimple("S_" + x.value, "", x.line, x.pos);
                 case TokenType.String:  return new ExpressionSimple("String", x.value, x.line, x.pos);
                 case TokenType.Word: {
-                    if (new RegExp(/^[0-9]+$/, "g").test(x.value)) return new ExpressionSimple("Int", BigInt(x.value), x.line, x.pos);
-                    if (this.is_valid_identifier(x.value)) return new ExpressionSimple("Id", x.value, x.line, x.pos);
+                    if (new RegExp(/^[0-9]+$/, "g").test(x.value)) {
+                        return new ExpressionSimple("Int", BigInt(x.value), x.line, x.pos);
+                    }
+                    if (this.is_valid_identifier(x.value)) {
+                        return new ExpressionSimple("Id", x.value, x.line, x.pos);
+                    }
                     throw new Error(`ParserError: Invalid identifier "${x.value}" @ ${x.line}:${x.pos}`);
                 }
             }
