@@ -34,7 +34,7 @@ export class Language {
                 super();
             }
             is_valid_identifier(word) {
-                return that.isValidIdentifier(word);
+                return that.is_valid_identifier(word);
             }
         })();
     }
